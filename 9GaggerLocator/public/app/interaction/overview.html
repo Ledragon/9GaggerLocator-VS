@@ -1,0 +1,64 @@
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Map of users
+                </div>
+                <div class="panel-body">
+                    <ld-map></ld-map>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table-condensed table table-hover" style="font-size:10px;">
+                <tr style="background-color:lightgray">
+                    <th></th>
+                    <th>User name</th>
+                    <th>Gender</th>
+                    <th>Country</th>
+                </tr>
+                <tr ng-repeat="user in vm.users" >
+                    <td style="color:red">&#9679;</td>
+                    <td>{{user.userName}}</td>
+                    <td>
+                        <i class="fa fa-mars" ng-if="user.gender==='Male'"></i>
+                        <i class="fa fa-venus" ng-if="user.gender==='Female'"></i>
+                    </td>
+                    <td>{{user.country}}</td>
+                </tr>
+            </table>
+        </div>
+        <!--<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="user in vm.users">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    {{user.userName}}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <img src="{{user.avatar}}" style="max-width :70px;" />
+                        </div>
+                        <div class="col-xs-6">
+                            <table class="table">
+                                <tr>
+                                    <td> {{user.gender}} </td>
+                                </tr>
+                                <tr>
+                                    <td> {{user.country}} </td>
+                                </tr>
+                                <tr>
+                                    <td>{{user.state}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{user.city}}</td>
+                                </tr>
+                            </table>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>

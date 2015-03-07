@@ -1,0 +1,42 @@
+<div>
+<!--    <div class="jumbotron">
+        <h1>Log in</h1>
+    </div>-->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Credentials
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label class="control-label">User name</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <input type="text" ng-model="vm.userName" class="form-control" placeholder="User name"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label class="control-label">Password</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <input type="password" ng-model="vm.password" class="form-control" placeholder="Password" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group col-xs-12">
+                                <button class="btn btn-primary" ng-click="vm.signin(vm.userName, vm.password)">Connect</button>
+                                <a class="btn btn-default" ui-sref="register">Register</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
