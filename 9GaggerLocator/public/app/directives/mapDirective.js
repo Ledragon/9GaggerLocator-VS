@@ -2,11 +2,15 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts"/>
 var Directives;
 (function (Directives) {
-    //function () {
     var app = angular.module('app');
-    app.directive('ldMap', mapDirective);
-    function mapDirective() {
-        var linkFunction = function (scope, element, attributes) {
+    app.directive('ldMap', function () { return new mapDirective(); });
+    var mapDirective = (function () {
+        function mapDirective() {
+            this.restrict = 'E';
+            this.template = '<div><span class="fa fa-spin fa-spinner" ng-show="isLoading"></span></div>';
+            this.replace = true;
+        }
+        mapDirective.prototype.link = function (scope, element, attributes) {
             try {
                 scope.isLoading = true;
                 var svg = d3.select(element[0]).append('svg').attr('width', '100%');
@@ -37,13 +41,8 @@ var Directives;
             }
             scope.isLoading = false;
         };
-        var directive = {
-            restrict: 'E',
-            template: '<div><span class="fa fa-spin fa-spinner" ng-show="isLoading"></span></div>',
-            replace: true,
-            link: linkFunction
-        };
-        return directive;
-    }
+        return mapDirective;
+    })();
+    ;
 })(Directives || (Directives = {}));
 //# sourceMappingURL=mapDirective.js.map
