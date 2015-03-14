@@ -21,7 +21,8 @@ module.exports = function () {
         getWiredepOptions: getWiredepOptions,
         index: client + 'index.html',
         injectOptions:{
-            ignorePath: client
+            ignorePath: client,
+            addRootSlash:false
         },
         js: [
             app + '**/*.module.js',

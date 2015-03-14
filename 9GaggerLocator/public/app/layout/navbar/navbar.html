@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" ng-controller="navBarController as vm">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example">
@@ -23,6 +23,8 @@
                     <a ui-sref="overview"><span class="fa fa-users"></span> Users</a>
                 </li>
             </ul>
+            <p class="navbar-text navbar-right">{{vm.currentUser.username}}</p> 
         </div>
+       
     </div>
 </nav>
