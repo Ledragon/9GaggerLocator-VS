@@ -5,9 +5,10 @@
 
     interface InavBarController {
         currentUser: any;
+        signout(): void;
     }
 
-    class navBarController {
+    class navBarController implements InavBarController {
         static controllerId = 'navBarController';
         currentUser: any;
         constructor($scope: InavBarScope, identityService: Services.IidentityService) {
@@ -16,6 +17,9 @@
             $scope.$watch(() => identityService.currentUser,() => {
                 self.currentUser = identityService.currentUser;
             });
+        }
+        signout(): void{
+
         }
     }
 

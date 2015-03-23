@@ -10,6 +10,8 @@ var app;
                     self.currentUser = identityService.currentUser;
                 });
             }
+            navBarController.prototype.signout = function () {
+            };
             navBarController.controllerId = 'navBarController';
             return navBarController;
         })();

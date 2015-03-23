@@ -219,6 +219,7 @@
     <Content Include="public\bower\jquery\src\sizzle\dist\sizzle.min.map" />
     <Content Include="public\bower\lodash\.bower.json" />
     <Content Include="public\bower\lodash\bower.json" />
+    <Content Include="server.js" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
     <Content Include="public\bower\d3\d3.min.js.map">
