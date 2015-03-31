@@ -220,6 +220,7 @@
     <Content Include="public\bower\lodash\.bower.json" />
     <Content Include="public\bower\lodash\bower.json" />
     <Content Include="server.js" />
+    <Content Include="server\config\passport.js" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
     <Content Include="public\bower\d3\d3.min.js.map">
@@ -239,7 +240,7 @@
     <TypeScriptCompile Include="public\app\account\loginController.ts" />
     <Content Include="public\app\account\register.html" />
     <Content Include="public\app\account\registerController.js" />
-    <Content Include="public\app\app.js" />
+    <TypeScriptCompile Include="public\app\app.ts" />
     <Content Include="public\app\config.route.js" />
     <Content Include="public\app\interaction\overview.html" />
     <Content Include="public\app\interaction\OverviewController.js" />
