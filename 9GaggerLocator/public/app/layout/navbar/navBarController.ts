@@ -11,7 +11,11 @@
     class navBarController implements InavBarController {
         static controllerId = 'navBarController';
         currentUser: any;
-        constructor($scope: InavBarScope, identityService: Services.IidentityService) {
+        constructor($scope: InavBarScope,
+            private $state:ng.ui.IStateService,
+            identityService: Services.IidentityService,
+            private authenticationService: Services.IauthenticationService,
+            private notifierService:Services.InotificationSrvice) {
             $scope.vm = this;
             var self = this;
             $scope.$watch(() => identityService.currentUser,() => {
@@ -19,13 +23,17 @@
             });
         }
         signout(): void{
-
+            var self = this;
+            this.authenticationService.logoutUser().then(() => {
+                self.notifierService.success('You have successfully signed out');
+                self.$state.go('login');
+            });
         }
     }
 
     var app = angular.module('app');
     app.controller(navBarController.controllerId,
-        ['$scope', 'identityService',
-            ($scope, identityService) =>
-                new navBarController($scope, identityService)]);
+        ['$scope', '$state', 'identityService','authenticationService','notifierService',
+            ($scope, $state, identityService, authenticationService, notifierService) =>
+                new navBarController($scope, $state, identityService, authenticationService, notifierService)]);
 }

@@ -15,7 +15,7 @@ var app;
                     password: password
                 };
                 var self = this;
-                this.$http.post('http://localhost:3030/login', body).then(function (response) {
+                this.$http.post('login', body).then(function (response) {
                     if (response.data.success) {
                         self.identityService.currentUser = response.data.user;
                         defered.resolve(true);
@@ -27,6 +27,15 @@ var app;
                     defered.reject();
                 });
                 return defered.promise;
+            };
+            authenticationService.prototype.logoutUser = function () {
+                var deferred = this.$q.defer();
+                var self = this;
+                this.$http.post('/logout', { logout: true }).then(function () {
+                    self.identityService.currentUser = undefined;
+                    deferred.resolve();
+                });
+                return deferred.promise;
             };
             authenticationService.serviceId = 'authenticationService';
             return authenticationService;

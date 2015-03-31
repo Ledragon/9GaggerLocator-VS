@@ -1,6 +1,7 @@
 ﻿module app.Services {
     export interface IauthenticationService {
         login(userName: string, password: string): ng.IPromise<any>;
+        logoutUser(): ng.IPromise<any>;
     }
 
     class authenticationService implements IauthenticationService {
@@ -18,7 +19,7 @@
                 password: password
             };
             var self = this;
-            this.$http.post('http://localhost:3030/login', body).then(function (response: any) {
+            this.$http.post('login', body).then(function (response: any) {
                 if (response.data.success) {
                     self.identityService.currentUser = response.data.user;
                     defered.resolve(true);
@@ -30,6 +31,17 @@
                 });
             return defered.promise;
         }
+
+        logoutUser(): ng.IPromise<any>{
+            var deferred = this.$q.defer();
+            var self = this;
+            this.$http.post('/logout', { logout: true }).then(() => {
+                self.identityService.currentUser = undefined;
+                deferred.resolve();
+            });
+            return deferred.promise;
+        }
+
 
     }
 

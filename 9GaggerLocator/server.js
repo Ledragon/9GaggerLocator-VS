@@ -30,6 +30,11 @@ passport.use(new LocalStrategy(
     }
 ));
 
+//app.use(function (request, result, next) {
+//    console.log(request.user);
+//    next();
+//});
+
 
 passport.serializeUser(function (user, done) {
     if (user) {

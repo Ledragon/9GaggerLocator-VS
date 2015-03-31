@@ -8,7 +8,7 @@ module.exports = function (app) {
     });
 
     app.post('/login', function (request, result, next) {
-        
+
         var auth = passport.authenticate('local', function (error, user) {
             if (error) {
                 return next(error);
@@ -29,5 +29,10 @@ module.exports = function (app) {
             });
         });
         auth(request, result, next);
+    });
+
+    app.post('/logout', function (request, result) {
+        request.logout();
+        result.end();
     });
 };
