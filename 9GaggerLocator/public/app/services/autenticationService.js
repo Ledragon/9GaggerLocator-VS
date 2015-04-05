@@ -1,12 +1,14 @@
+/// <reference path="../account/userresource.ts" />
 var app;
 (function (_app) {
     var Services;
     (function (Services) {
         var authenticationService = (function () {
-            function authenticationService($http, $q, identityService) {
+            function authenticationService($http, $q, identityService, userResource) {
                 this.$http = $http;
                 this.$q = $q;
                 this.identityService = identityService;
+                this.userResource = userResource;
             }
             authenticationService.prototype.login = function (userName, password) {
                 var defered = this.$q.defer();
@@ -17,7 +19,9 @@ var app;
                 var self = this;
                 this.$http.post('login', body).then(function (response) {
                     if (response.data.success) {
-                        self.identityService.currentUser = response.data.user;
+                        var user = new self.userResource();
+                        angular.extend(user, response.data.user);
+                        self.identityService.currentUser = user;
                         defered.resolve(true);
                     }
                     else {
@@ -41,7 +45,13 @@ var app;
             return authenticationService;
         })();
         var app = angular.module('app');
-        app.factory(authenticationService.serviceId, ['$http', '$q', 'identityService', function ($http, $q, identifierService) { return new authenticationService($http, $q, identifierService); }]);
+        app.factory(authenticationService.serviceId, [
+            '$http',
+            '$q',
+            'identityService',
+            'userResource',
+            function ($http, $q, identifierService, userResource) { return new authenticationService($http, $q, identifierService, userResource); }
+        ]);
     })(Services = _app.Services || (_app.Services = {}));
 })(app || (app = {}));
 //# sourceMappingURL=autenticationService.js.map

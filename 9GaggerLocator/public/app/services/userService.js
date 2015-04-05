@@ -6,10 +6,10 @@
         function userService() {
             function getAll() {
                 var users = [];
-                for(var  i = 0; i < 10; i++) {
+                for (var i = 0; i < 10; i++) {
                     users.push({
-                        userName: 'user'+i,
-                        country:'USA',
+                        userName: 'user' + i,
+                        country: 'USA',
                         gender: 'Male',
                         state: 'New-York',
                         city: 'New-York',

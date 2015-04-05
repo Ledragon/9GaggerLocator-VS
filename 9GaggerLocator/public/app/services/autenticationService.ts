@@ -1,4 +1,5 @@
-﻿module app.Services {
+﻿/// <reference path="../account/userresource.ts" />
+module app.Services {
     export interface IauthenticationService {
         login(userName: string, password: string): ng.IPromise<any>;
         logoutUser(): ng.IPromise<any>;
@@ -9,7 +10,8 @@
 
         constructor(private $http: ng.IHttpService,
             private $q: ng.IQService,
-            private identityService: Services.IidentityService) {
+            private identityService: Services.IidentityService,
+            private userResource) {
         }
 
         login(userName: string, password: string): ng.IPromise<any> {
@@ -21,7 +23,9 @@
             var self = this;
             this.$http.post('login', body).then(function (response: any) {
                 if (response.data.success) {
-                    self.identityService.currentUser = response.data.user;
+                    var user = new self.userResource();
+                    angular.extend(user, response.data.user);
+                    self.identityService.currentUser = user;
                     defered.resolve(true);
                 } else {
                     defered.resolve(false);
@@ -32,7 +36,7 @@
             return defered.promise;
         }
 
-        logoutUser(): ng.IPromise<any>{
+        logoutUser(): ng.IPromise<any> {
             var deferred = this.$q.defer();
             var self = this;
             this.$http.post('/logout', { logout: true }).then(() => {
@@ -41,12 +45,12 @@
             });
             return deferred.promise;
         }
-
-
     }
 
     var app = angular.module('app');
-    app.factory(authenticationService.serviceId, ['$http', '$q', 'identityService', ($http, $q, identifierService) =>
-        new authenticationService($http, $q, identifierService)
+    app.factory(authenticationService.serviceId, [
+        '$http', '$q', 'identityService', 'userResource',
+        ($http, $q, identifierService, userResource) =>
+            new authenticationService($http, $q, identifierService, userResource)
     ]);
 }

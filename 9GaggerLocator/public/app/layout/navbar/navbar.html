@@ -33,6 +33,9 @@
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu">
+                    <li ng-if="vm.currentUser.isAdmin()">
+                        <a ui-sref="users">Users admin</a>
+                    </li>
                     <li>
                         <a href="" ng-click="vm.signout()">Sign out</a>
                     </li>

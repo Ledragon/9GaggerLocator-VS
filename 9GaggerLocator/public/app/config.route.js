@@ -29,6 +29,26 @@
                     templateUrl: 'app/interaction/overview.html',
                     controller: 'OverviewController',
                     controllerAs: 'vm'
+                })
+                .state('notAuthorized', {
+                    url: '/notauthorized',
+                    templateUrl: 'app/layout/special/notAuthorized.html'
+                })
+                .state('users', {
+                    url: '/admin/users',
+                    templateUrl: 'app/admin/users.html',
+                    controller: 'UsersController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        auth: function (identityService, $q) {
+                            if (identityService.currentUser && identityService.currentUser.isAdmin()) {
+                                return true;
+                            }
+                            else{
+                                return $q.reject('Not authorized');
+                            }
+                        }
+                    }
                 });
         });
     }()

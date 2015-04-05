@@ -1,0 +1,12 @@
+﻿<div class="container">
+    <table class="table table-condensed">
+        <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+        </tr>
+        <tr ng-repeat="user in vm.users">
+            <td><img src="{{user.avatar}}" style="max-width:50px;"/></td>
+            <td>{{user.userName}}</td>
+        </tr>
+    </table>
+</div>
