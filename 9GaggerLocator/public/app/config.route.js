@@ -1,6 +1,14 @@
 (
     function () {
         var app = angular.module('app');
+        var routeRoleChecks = {
+            admin: {
+                auth: function (authenticationService) {
+                    return authenticationService.authorizeCurrentUserForRoute('admin');
+                }
+            }
+        };
+
         app.config(function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider.otherwise('/home');
             $stateProvider
@@ -39,16 +47,7 @@
                     templateUrl: 'app/admin/users.html',
                     controller: 'UsersController',
                     controllerAs: 'vm',
-                    resolve: {
-                        auth: function (identityService, $q) {
-                            if (identityService.currentUser && identityService.currentUser.isAdmin()) {
-                                return true;
-                            }
-                            else{
-                                return $q.reject('Not authorized');
-                            }
-                        }
-                    }
+                    resolve: routeRoleChecks.admin
                 });
         });
     }()

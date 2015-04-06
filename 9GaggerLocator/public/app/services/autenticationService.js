@@ -41,6 +41,14 @@ var app;
                 });
                 return deferred.promise;
             };
+            authenticationService.prototype.authorizeCurrentUserForRoute = function (role) {
+                if (this.identityService.isAuthorized(role)) {
+                    return false;
+                }
+                else {
+                    return this.$q.reject('Not authorized');
+                }
+            };
             authenticationService.serviceId = 'authenticationService';
             return authenticationService;
         })();

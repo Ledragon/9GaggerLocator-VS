@@ -45,6 +45,15 @@ module app.Services {
             });
             return deferred.promise;
         }
+
+        authorizeCurrentUserForRoute(role: string):any {
+            if (this.identityService.isAuthorized(role)) {
+                return false;
+            }
+            else {
+                return this.$q.reject('Not authorized');
+            }
+        }
     }
 
     var app = angular.module('app');

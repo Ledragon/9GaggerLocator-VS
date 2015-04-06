@@ -13,7 +13,7 @@ module app {
                 }
             });
 
-            $rootScope.$on('$stateChangeError',(event, toState: ng.ui.IState, toParams, fromState: ng.ui.IState, fromParams, error) => {
+            $rootScope.$on('$stateChangeError', (event, toState: ng.ui.IState, toParams, fromState: ng.ui.IState, fromParams, error) => {
                 if (error === 'Not authorized') {
                     $state.go('notAuthorized');
                 }

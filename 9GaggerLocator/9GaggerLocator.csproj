@@ -61,6 +61,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="public\app\account\userResource.ts" />
     <Content Include="public\app\admin\users.html" />
+    <Content Include="public\app\layout\special\notAuthorized.html" />
     <Content Include="public\bower\angular-animate\.bower.json" />
     <Content Include="public\bower\angular-animate\angular-animate.min.js.map" />
     <Content Include="public\bower\angular-animate\bower.json" />

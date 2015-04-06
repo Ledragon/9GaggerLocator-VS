@@ -8,6 +8,9 @@ var app;
             identityService.prototype.isAuthenticated = function () {
                 return !!this.currentUser;
             };
+            identityService.prototype.isAuthorized = function (role) {
+                return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+            };
             identityService.serviceId = 'identityService';
             return identityService;
         })();
