@@ -3,6 +3,8 @@ module app.Services {
     export interface IauthenticationService {
         login(userName: string, password: string): ng.IPromise<any>;
         logoutUser(): ng.IPromise<any>;
+        authorizeCurrentUserForRoute(role: string): any;
+        createUser(user: any): ng.IPromise<any>;
     }
 
     class authenticationService implements IauthenticationService {
@@ -46,13 +48,28 @@ module app.Services {
             return deferred.promise;
         }
 
-        authorizeCurrentUserForRoute(role: string):any {
+        authorizeCurrentUserForRoute(role: string): any {
             if (this.identityService.isAuthorized(role)) {
                 return false;
             }
             else {
                 return this.$q.reject('Not authorized');
             }
+        }
+
+        createUser(user: any): ng.IPromise<any> {
+            var deferred = this.$q.defer();
+            var userResource = new this.userResource(user);
+            var self = this;
+            userResource.$save().then(
+                (newUser) => {
+                    self.identityService.currentUser = newUser;
+                    deferred.resolve();
+                },
+                (response) => {
+                    deferred.reject(response.data.reason);
+                });
+            return deferred.promise;
         }
     }
 

@@ -49,6 +49,18 @@ var app;
                     return this.$q.reject('Not authorized');
                 }
             };
+            authenticationService.prototype.createUser = function (user) {
+                var deferred = this.$q.defer();
+                var userResource = new this.userResource(user);
+                var self = this;
+                userResource.$save().then(function (newUser) {
+                    self.identityService.currentUser = newUser;
+                    deferred.resolve();
+                }, function (response) {
+                    deferred.reject(response.data.reason);
+                });
+                return deferred.promise;
+            };
             authenticationService.serviceId = 'authenticationService';
             return authenticationService;
         })();

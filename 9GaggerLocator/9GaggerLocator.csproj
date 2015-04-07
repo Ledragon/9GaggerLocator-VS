@@ -225,6 +225,8 @@
     <Content Include="server.js" />
     <Content Include="server\config\auth.js" />
     <Content Include="server\config\passport.js" />
+    <Content Include="server\controllers\users.js" />
+    <Content Include="server\utilities\encryption.js" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
     <Content Include="public\bower\d3\d3.min.js.map">

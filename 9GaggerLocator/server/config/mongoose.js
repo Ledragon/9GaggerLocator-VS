@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var crypto = require('crypto');
+var crypto = require('../utilities/encryption');
 
 
 module.exports = function (config) {
@@ -21,7 +21,7 @@ module.exports = function (config) {
 
     userSchema.methods = {
         authenticate: function (password) {
-            return hashPassword(this.salt, password) === this.hashed_pwd;
+            return crypto.hashPassword(this.salt, password) === this.hashed_pwd;
         }
     }
 
@@ -29,8 +29,8 @@ module.exports = function (config) {
 
     User.find({}).exec(function (err, collection) {
         if (collection.length === 0) {
-            var salt = createSalt();
-            var hash = hashPassword(salt, 'hugues');
+            var salt = crypto.createSalt();
+            var hash = crypto.hashPassword(salt, 'hugues');
                 User.create({
                     firstName: 'Hugues',
                     lastName: 'Stefanski',
@@ -40,8 +40,8 @@ module.exports = function (config) {
                     roles:['admin']
                 });
 
-                salt = createSalt();
-                hash = hashPassword(salt, 'joe');
+                salt = crypto.createSalt();
+                hash = crypto.hashPassword(salt, 'joe');
                 User.create({
                     firstName: 'Joe',
                     lastName: 'Eames',
@@ -50,8 +50,8 @@ module.exports = function (config) {
                     hashed_pwd: hash,
                     roles:[]
                 });
-                salt = createSalt();
-                hash = hashPassword(salt, 'john');
+                salt = crypto.createSalt();
+                hash = crypto.hashPassword(salt, 'john');
                 User.create({
                     firstName: 'John',
                     lastName: 'Papa',
@@ -62,12 +62,3 @@ module.exports = function (config) {
             }
     });
 };
-
-function createSalt() {
-    return crypto.randomBytes(128).toString('base64');
-}
-
-function hashPassword(salt, password) {
-    var hmac = crypto.createHmac('sha1', salt);
-    return hmac.update(password).digest('hex');
-}
