@@ -245,7 +245,7 @@
     <Content Include="public\app\account\login.html" />
     <TypeScriptCompile Include="public\app\account\loginController.ts" />
     <Content Include="public\app\account\register.html" />
-    <Content Include="public\app\account\registerController.js" />
+    <TypeScriptCompile Include="public\app\account\registerController.ts" />
     <TypeScriptCompile Include="public\app\admin\UsersController.ts" />
     <TypeScriptCompile Include="public\app\app.ts" />
     <Content Include="public\app\config.route.js" />
@@ -418,6 +418,7 @@
     <TypeScriptCompile Include="public\app\services\identityService.ts" />
     <TypeScriptCompile Include="public\app\services\notifier.ts" />
     <TypeScriptCompile Include="public\bower\angular-ui-router\api\angular-ui-router.d.ts" />
+    <TypeScriptCompile Include="typings\angular-ui-router\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="typings\d3\d3.d.ts" />
     <TypeScriptCompile Include="typings\jquery\jquery.d.ts" />
