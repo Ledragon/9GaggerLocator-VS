@@ -7,6 +7,21 @@ exports.getUsers = function (request, response) {
     });
 }
 
+exports.getUserNames=function(request, response) {
+    User.find({}).exec(function (error, collection) {
+        if (error) {
+        } else {
+            var result = [];
+            collection.forEach(function(user) {
+                result.push({
+                    userName: user.username
+                });
+            });
+            response.send(result);
+        }
+    });
+}
+
 exports.createUser = function (request, response, next) {
     var userData = request.body;
     userData.salt=crypto.createSalt();

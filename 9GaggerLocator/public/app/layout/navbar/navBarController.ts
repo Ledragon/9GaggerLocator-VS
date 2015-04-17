@@ -15,7 +15,7 @@
             private $state:ng.ui.IStateService,
             identityService: Services.IidentityService,
             private authenticationService: Services.IauthenticationService,
-            private notifierService:Services.InotificationSrvice) {
+            private notifierService:Services.InotificationService) {
             $scope.vm = this;
             var self = this;
             $scope.$watch(() => identityService.currentUser,() => {

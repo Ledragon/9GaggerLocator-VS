@@ -5,7 +5,7 @@ module app {
 
     app.run(['$http', '$rootScope', '$state', 'identityService', 'userResource',
         ($http, $rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, identityService, userResource) => {
-            $http.get('/user').then(function (data) {
+            $http.get('/user').then(data => {
                 if (data.data) {
                     var user = new userResource();
                     angular.extend(user, data.data);

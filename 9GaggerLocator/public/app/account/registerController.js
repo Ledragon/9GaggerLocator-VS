@@ -11,6 +11,7 @@ var app;
                 this.notifierService = notifierService;
             }
             registerController.prototype.register = function () {
+                var _this = this;
                 var newUser = {
                     username: this.userName,
                     password: this.password,
@@ -20,17 +21,35 @@ var app;
                 console.log(newUser);
                 var self = this;
                 this.authenticationService.createUser(newUser).then(function () {
-                    self.notifierService.success('user created');
-                    self.$state.go('overview');
+                    _this.notifierService.success('user created');
+                    _this.$state.go('overview');
                 }, function (reason) {
-                    self.notifierService.error('User creation failed.');
+                    var message;
+                    if (reason.indexOf('E11000') > -1) {
+                        message = 'This user name already exists.';
+                    }
+                    else {
+                        message = 'User creation failed.';
+                    }
+                    self.notifierService.error(message);
                 });
             };
             registerController.controllerId = 'RegisterController';
             return registerController;
         })();
+        var userViewModel = (function () {
+            function userViewModel() {
+            }
+            return userViewModel;
+        })();
         var app = angular.module('app');
-        app.controller(registerController.controllerId, ['$scope', '$state', 'authenticationService', 'notifierService', function ($scope, $state, authenticationService, notifierService) { return new registerController($scope, $state, authenticationService, notifierService); }]);
+        app.controller(registerController.controllerId, [
+            '$scope',
+            '$state',
+            'authenticationService',
+            'notifierService',
+            function ($scope, $state, authenticationService, notifierService) { return new registerController($scope, $state, authenticationService, notifierService); }
+        ]);
     })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=registerController.js.map

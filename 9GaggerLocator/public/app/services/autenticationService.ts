@@ -8,7 +8,7 @@ module app.Services {
     }
 
     class authenticationService implements IauthenticationService {
-        static serviceId: string = 'authenticationService';
+        public static serviceId = 'authenticationService';
 
         constructor(private $http: ng.IHttpService,
             private $q: ng.IQService,
@@ -16,29 +16,28 @@ module app.Services {
             private userResource) {
         }
 
-        login(userName: string, password: string): ng.IPromise<any> {
+        public login(userName: string, password: string): ng.IPromise<any> {
             var defered = this.$q.defer();
             var body = {
                 username: userName,
                 password: password
             };
-            var self = this;
-            this.$http.post('login', body).then(function (response: any) {
+            this.$http.post('login', body).then((response: any) => {
                 if (response.data.success) {
-                    var user = new self.userResource();
+                    var user = new this.userResource();
                     angular.extend(user, response.data.user);
-                    self.identityService.currentUser = user;
+                    this.identityService.currentUser = user;
                     defered.resolve(true);
                 } else {
                     defered.resolve(false);
                 }
-            },(response) => {
-                    defered.reject();
-                });
+            }, (reason) => {
+                defered.reject(reason);
+            });
             return defered.promise;
         }
 
-        logoutUser(): ng.IPromise<any> {
+        public logoutUser(): ng.IPromise<any> {
             var deferred = this.$q.defer();
             var self = this;
             this.$http.post('/logout', { logout: true }).then(() => {
@@ -48,27 +47,26 @@ module app.Services {
             return deferred.promise;
         }
 
-        authorizeCurrentUserForRoute(role: string): any {
+        public authorizeCurrentUserForRoute(role: string): any {
             if (this.identityService.isAuthorized(role)) {
                 return false;
-            }
-            else {
+            } else {
                 return this.$q.reject('Not authorized');
             }
         }
 
-        createUser(user: any): ng.IPromise<any> {
+        public createUser(user: any): ng.IPromise<any> {
             var deferred = this.$q.defer();
             var userResource = new this.userResource(user);
             var self = this;
             userResource.$save().then(
-                (newUser) => {
-                    self.identityService.currentUser = newUser;
-                    deferred.resolve();
-                },
-                (response) => {
-                    deferred.reject(response.data.reason);
-                });
+            (newUser) => {
+                self.identityService.currentUser = newUser;
+                deferred.resolve();
+            },
+            (response) => {
+                deferred.reject(response.data.reason);
+            });
             return deferred.promise;
         }
     }
@@ -76,7 +74,6 @@ module app.Services {
     var app = angular.module('app');
     app.factory(authenticationService.serviceId, [
         '$http', '$q', 'identityService', 'userResource',
-        ($http, $q, identifierService, userResource) =>
-            new authenticationService($http, $q, identifierService, userResource)
+        ($http, $q, identityService, userResource) => new authenticationService($http, $q, identityService, userResource)
     ]);
 }

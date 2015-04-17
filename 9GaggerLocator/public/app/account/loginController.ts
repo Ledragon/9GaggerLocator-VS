@@ -14,7 +14,7 @@ module app.Controllers {
         constructor(
             private $state: ng.ui.IStateService,
             private authenticationService: Services.IauthenticationService,
-            private notifierService: Services.InotificationSrvice) {
+            private notifierService: Services.InotificationService) {
             this.userName = '';
             this.password = '';
         }

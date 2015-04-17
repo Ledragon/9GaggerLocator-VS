@@ -11,24 +11,24 @@ var app;
                 this.userResource = userResource;
             }
             authenticationService.prototype.login = function (userName, password) {
+                var _this = this;
                 var defered = this.$q.defer();
                 var body = {
                     username: userName,
                     password: password
                 };
-                var self = this;
                 this.$http.post('login', body).then(function (response) {
                     if (response.data.success) {
-                        var user = new self.userResource();
+                        var user = new _this.userResource();
                         angular.extend(user, response.data.user);
-                        self.identityService.currentUser = user;
+                        _this.identityService.currentUser = user;
                         defered.resolve(true);
                     }
                     else {
                         defered.resolve(false);
                     }
-                }, function (response) {
-                    defered.reject();
+                }, function (reason) {
+                    defered.reject(reason);
                 });
                 return defered.promise;
             };
@@ -70,7 +70,7 @@ var app;
             '$q',
             'identityService',
             'userResource',
-            function ($http, $q, identifierService, userResource) { return new authenticationService($http, $q, identifierService, userResource); }
+            function ($http, $q, identityService, userResource) { return new authenticationService($http, $q, identityService, userResource); }
         ]);
     })(Services = _app.Services || (_app.Services = {}));
 })(app || (app = {}));
