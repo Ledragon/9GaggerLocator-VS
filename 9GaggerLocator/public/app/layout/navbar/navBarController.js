@@ -24,7 +24,14 @@ var app;
             return navBarController;
         })();
         var app = angular.module('app');
-        app.controller(navBarController.controllerId, ['$scope', '$state', 'identityService', 'authenticationService', 'notifierService', function ($scope, $state, identityService, authenticationService, notifierService) { return new navBarController($scope, $state, identityService, authenticationService, notifierService); }]);
+        app.controller(navBarController.controllerId, [
+            '$scope',
+            '$state',
+            'identityService',
+            'authenticationService',
+            'notifierService',
+            function ($scope, $state, identityService, authenticationService, notifierService) { return new navBarController($scope, $state, identityService, authenticationService, notifierService); }
+        ]);
     })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=navBarController.js.map

@@ -27,6 +27,7 @@ var app;
                     var message;
                     if (reason.indexOf('E11000') > -1) {
                         message = 'This user name already exists.';
+                        self.registerForm.userName.$setValidity('User name already exists', false);
                     }
                     else {
                         message = 'User creation failed.';

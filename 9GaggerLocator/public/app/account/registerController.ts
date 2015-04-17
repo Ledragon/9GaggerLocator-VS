@@ -10,13 +10,17 @@ module app.Controllers {
         register(): void;
     }
 
+    interface IregisterForm extends  ng.IFormController{
+        userName:ng.INgModelController;
+    }
+
     class registerController implements IregisterController {
         public static controllerId='RegisterController';
         public userName: string;
         public password: string;
         public firstName: string;
         public lastName: string;
-        public registerForm: ng.IFormController;
+        public registerForm: IregisterForm;
 
         constructor(private $scope: ng.IScope,
             private $state: ng.ui.IStateService,
@@ -43,6 +47,7 @@ module app.Controllers {
                     var message: string;
                     if (reason.indexOf('E11000') > -1) {
                         message = 'This user name already exists.';
+                        self.registerForm.userName.$setValidity('User name already exists', false);
                         //TODO make name field invalid
                     } else {
                         message = 'User creation failed.';

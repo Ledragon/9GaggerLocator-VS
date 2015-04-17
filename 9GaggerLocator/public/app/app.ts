@@ -3,8 +3,9 @@ module app {
     'use strict';
     var app = angular.module('app', ['ui.router', 'ngResource']);
 
-    app.run(['$http', '$rootScope', '$state', 'identityService', 'userResource',
-        ($http, $rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, identityService, userResource) => {
+    app.run([
+        '$http', '$rootScope', '$state', 'identityService', 'userResource',
+        ($http, $rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, identityService: Services.IidentityService, userResource) => {
             $http.get('/user').then(data => {
                 if (data.data) {
                     var user = new userResource();
@@ -18,5 +19,6 @@ module app {
                     $state.go('notAuthorized');
                 }
             });
-        }]);
+        }
+    ]);
 }

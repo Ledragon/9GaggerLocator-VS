@@ -8,8 +8,8 @@ module app.Controllers {
     }
 
     class LoginController implements ILoginController {
-        userName: string;
-        password: string;
+        public userName: string;
+        public password: string;
 
         constructor(
             private $state: ng.ui.IStateService,
@@ -19,15 +19,14 @@ module app.Controllers {
             this.password = '';
         }
 
-        signin() {
+        public signin() {
             var self = this;
             this.authenticationService.login(this.userName, this.password).then((success) => {
                 if (success) {
-                    self.notifierService.success('Successfully logged in as ' + self.userName);
+                    self.notifierService.success(`Successfully logged in as ${self.userName}`);
                     self.$state.go('overview');
-                }
-                else {
-                    self.notifierService.error('Login failed for user ' + self.userName);
+                } else {
+                    self.notifierService.error(`Login failed for user ${self.userName}`);
                 }
             });
         }
@@ -38,6 +37,6 @@ module app.Controllers {
     app.controller('LoginController', [
         '$state', 'authenticationService', 'notifierService',
         ($state, authenticationService, notifierService) =>
-            new LoginController($state, authenticationService, notifierService)
+        new LoginController($state, authenticationService, notifierService)
     ]);
 }

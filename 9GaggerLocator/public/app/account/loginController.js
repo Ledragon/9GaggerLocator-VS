@@ -15,11 +15,11 @@ var app;
                 var self = this;
                 this.authenticationService.login(this.userName, this.password).then(function (success) {
                     if (success) {
-                        self.notifierService.success('Successfully logged in as ' + self.userName);
+                        self.notifierService.success("Successfully logged in as " + self.userName);
                         self.$state.go('overview');
                     }
                     else {
-                        self.notifierService.error('Login failed for user ' + self.userName);
+                        self.notifierService.error("Login failed for user " + self.userName);
                     }
                 });
             };
