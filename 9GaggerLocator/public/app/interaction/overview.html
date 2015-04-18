@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <table class="table-condensed table table-hover" style="font-size:10px;">
+            <table class="table-condensed table table-hover" style="font-size:12px;">
                 <tr style="background-color:lightgray">
                     <th></th>
                     <th>User name</th>
@@ -25,7 +25,7 @@
                         <i class="fa fa-mars" ng-if="user.gender==='Male'"></i>
                         <i class="fa fa-venus" ng-if="user.gender==='Female'"></i>
                     </td>
-                    <td>{{user.country}}</td>
+                    <td title="{{user.country}}"><i class="ld-flag flag-icon flag-icon-squared" ng-class="vm.flag(user.countryIsoA2)"></i></td>
                 </tr>
             </table>
         </div>

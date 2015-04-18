@@ -12,9 +12,11 @@ exports.getUserNames=function(request, response) {
         if (error) {
         } else {
             var result = [];
+            console.log(collection);
             collection.forEach(function(user) {
                 result.push({
-                    userName: user.username
+                    userName: user.username,
+                    country: user.country
                 });
             });
             response.send(result);

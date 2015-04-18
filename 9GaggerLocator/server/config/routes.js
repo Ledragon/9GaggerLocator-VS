@@ -1,5 +1,6 @@
 var auth = require('./auth');
 var usersController=require('../controllers/users');
+var geoController = require('../controllers/geo');
 
 module.exports = function (app) {
     app.get('/user', function (request, response) {
@@ -17,6 +18,10 @@ module.exports = function (app) {
 
     app.post('/api/users',
         usersController.createUser
+    );
+
+    app.get('/api/countries',
+        geoController.getCountries
     );
 
     app.get('*', function (request, response) {

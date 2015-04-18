@@ -10,11 +10,16 @@ var userSchema = mongoose.Schema({
     username: {
         type: String,
         required: '{PATH} is required',
-        unique:true
+        unique: true
     },
     salt: { type: String, required: '{PATH} is required' },
     hashed_pwd: { type: String, required: '{PATH} is required' },
-    roles: [String]
+    roles: [String],
+    country: String,
+    state: String,
+    city: String,
+    latitude: Number,
+    longitude: Number
 });
 
 userSchema.methods = {

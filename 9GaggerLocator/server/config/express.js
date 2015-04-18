@@ -5,6 +5,7 @@ var session = require('express-session');
 var passport = require('passport');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 module.exports = function (app, config) {
 
@@ -22,6 +23,7 @@ module.exports = function (app, config) {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    app.use(express.static(path.join(__dirname, 'data')));
     app.use(express.static(config.rootPath + '/public/'));
     
 };

@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/lodash/lodash.d.ts" />
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 module app.Controllers {
     interface IregisterController {
@@ -20,12 +21,22 @@ module app.Controllers {
         public password: string;
         public firstName: string;
         public lastName: string;
+        public country:string;
         public registerForm: IregisterForm;
+        countries=[];
 
         constructor(private $scope: ng.IScope,
             private $state: ng.ui.IStateService,
             private authenticationService: Services.IauthenticationService,
+            geoService:Services.IgeoService,
             private notifierService: Services.InotificationService) {
+            var self = this;
+            geoService.getCountries().then((data) => {
+                var geoJson = geoService.getGeoJSON(data);
+                self.countries = _(geoJson.features).pluck('properties').value();
+            }, (reason) => {
+                notifierService.error(reason);
+            });
         }
 
         public register(): void {
@@ -34,7 +45,8 @@ module app.Controllers {
                 username: this.userName,
                 password: this.password,
                 firstName: this.firstName,
-                lastName: this.lastName
+                lastName: this.lastName,
+                country: this.country
             };
 
             console.log(newUser);
@@ -68,8 +80,8 @@ module app.Controllers {
     var app = angular.module('app');
     app.controller(registerController.controllerId,
     [
-        '$scope', '$state', 'authenticationService', 'notifierService',
-        ($scope, $state, authenticationService, notifierService) =>
-        new registerController($scope, $state, authenticationService, notifierService)
+        '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',
+        ($scope, $state, authenticationService, geoService, notifierService) =>
+            new registerController($scope, $state, authenticationService, geoService, notifierService)
     ]);
 }

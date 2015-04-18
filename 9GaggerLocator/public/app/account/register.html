@@ -32,6 +32,15 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-4">
+                        <label class="control-label">Country</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <select class="input-sm form-control" ng-model="vm.country" ng-options="country.name as country.name for country in vm.countries | orderBy : 'name'"></select>
+                        <!--<input  type="text"  required/>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4">
                         <label class="control-label">Password</label>
                     </div>
                     <div class="col-xs-8">

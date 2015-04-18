@@ -1,14 +1,23 @@
+/// <reference path="../../../typings/lodash/lodash.d.ts" />
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 var app;
 (function (_app) {
     var Controllers;
     (function (Controllers) {
         var registerController = (function () {
-            function registerController($scope, $state, authenticationService, notifierService) {
+            function registerController($scope, $state, authenticationService, geoService, notifierService) {
                 this.$scope = $scope;
                 this.$state = $state;
                 this.authenticationService = authenticationService;
                 this.notifierService = notifierService;
+                this.countries = [];
+                var self = this;
+                geoService.getCountries().then(function (data) {
+                    var geoJson = geoService.getGeoJSON(data);
+                    self.countries = _(geoJson.features).pluck('properties').value();
+                }, function (reason) {
+                    notifierService.error(reason);
+                });
             }
             registerController.prototype.register = function () {
                 var _this = this;
@@ -16,7 +25,8 @@ var app;
                     username: this.userName,
                     password: this.password,
                     firstName: this.firstName,
-                    lastName: this.lastName
+                    lastName: this.lastName,
+                    country: this.country
                 };
                 console.log(newUser);
                 var self = this;
@@ -48,8 +58,9 @@ var app;
             '$scope',
             '$state',
             'authenticationService',
+            'geoService',
             'notifierService',
-            function ($scope, $state, authenticationService, notifierService) { return new registerController($scope, $state, authenticationService, notifierService); }
+            function ($scope, $state, authenticationService, geoService, notifierService) { return new registerController($scope, $state, authenticationService, geoService, notifierService); }
         ]);
     })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
