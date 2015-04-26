@@ -11,6 +11,13 @@ declare module TopoJSON {
         neighbors(objects);
     }
 
+    export interface TopoJSONObject {
+        type: string;
+        arcs?: Array<any>;
+        objects: any;
+        transform:any;
+    }
+
 }
 
 declare var topojson: TopoJSON.TopoJSON;

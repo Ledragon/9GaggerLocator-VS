@@ -22,7 +22,9 @@ module app.Controllers {
         }
 
         public flag(isoA2: string): string {
-            return `flag-icon-${isoA2.toLowerCase()}`;
+            if (isoA2) {
+                return `flag-icon-${isoA2.toLowerCase() }`;
+            }
         }
     }
 

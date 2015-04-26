@@ -59,7 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="public\app\account\profileCOntroller.ts" />
     <TypeScriptCompile Include="public\app\account\userResource.ts" />
+    <Content Include="public\app\account\profile.html" />
     <Content Include="public\app\admin\users.html" />
     <Content Include="public\app\layout\special\notAuthorized.html" />
     <Content Include="public\bower\angular-animate\.bower.json" />
@@ -239,6 +241,7 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="server\data\countries-110m.topo.json" />
+    <Content Include="tsd.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,6 +265,7 @@
     <Content Include="public\app\layout\special\home.html" />
     <Content Include="public\app\layout\special\notFound.html" />
     <TypeScriptCompile Include="public\app\layout\navbar\navBarController.ts" />
+    <TypeScriptCompile Include="public\app\models\user.ts" />
     <TypeScriptCompile Include="public\app\services\autenticationService.ts" />
     <TypeScriptCompile Include="public\app\services\d3Service.ts" />
     <TypeScriptCompile Include="public\app\services\geoService.ts" />

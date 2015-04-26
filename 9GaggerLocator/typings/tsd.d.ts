@@ -2,3 +2,4 @@
 /// <reference path="toastr/toastr.d.ts" />
 /// <reference path="angular-ui-router/angular-ui-router.d.ts" />
 /// <reference path="lodash/lodash.d.ts" />
+/// <reference path="geojson/geojson.d.ts" />

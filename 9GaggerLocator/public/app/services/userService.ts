@@ -2,6 +2,7 @@ module app.Services {
 
     export interface IuserService {
         getAll(): ng.IPromise<any>;
+        getNumberByCountry(): ng.IPromise<any>;
     }
 
     class userService implements IuserService {
@@ -18,6 +19,22 @@ module app.Services {
                 .error((reason) => {
                     defered.reject(reason);
                 });
+            return defered.promise;
+        }
+
+        public getNumberByCountry(): ng.IPromise<any> {
+            var defered = this.$q.defer();
+            this.getAll().then((users) => {
+                var grouped = _.groupBy(users,(u: Models.user) => u.country);
+                var result = [];
+                for (var key in grouped) {
+                    result.push({
+                        country: key,
+                        count: grouped[key].length
+                    });
+                }
+                defered.resolve(result);
+            });
             return defered.promise;
         }
     }

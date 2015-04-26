@@ -1,8 +1,9 @@
-﻿
+﻿/// <reference path="../../../typings/geojson/geojson.d.ts" />
+
 module app.Services {
     export interface IgeoService {
-        getCountries(): ng.IPromise<any>;
-        getGeoJSON(topojsonObjects: any): any;
+        getCountries(): ng.IPromise<TopoJSON.TopoJSONObject>;
+        getGeoJSON(topojsonObjects: any): GeoJSON.FeatureCollection;
         getCountry(countryName: string): ng.IPromise<any>;
     }
 
@@ -12,7 +13,7 @@ module app.Services {
         constructor(private $http: ng.IHttpService, private $q: ng.IQService) {
         }
 
-        public getCountries(): ng.IPromise<any> {
+        public getCountries(): ng.IPromise<TopoJSON.TopoJSONObject> {
             var defered = this.$q.defer();
             this.$http.get('api/countries')
                 .success((data) => {
@@ -25,7 +26,7 @@ module app.Services {
             return defered.promise;
         }
 
-        public getGeoJSON(topojsonObjects: any): any {
+        public getGeoJSON(topojsonObjects: any): GeoJSON.FeatureCollection {
             var geo = topojson.feature(topojsonObjects, topojsonObjects.objects.countries);
             //var geo = [];
             return geo;

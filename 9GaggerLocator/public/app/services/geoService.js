@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/geojson/geojson.d.ts" />
 var app;
 (function (_app) {
     var Services;

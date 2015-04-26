@@ -20,7 +20,9 @@ var app;
                 });
             }
             OverviewController.prototype.flag = function (isoA2) {
-                return "flag-icon-" + isoA2.toLowerCase();
+                if (isoA2) {
+                    return "flag-icon-" + isoA2.toLowerCase();
+                }
             };
             return OverviewController;
         })();

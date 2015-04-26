@@ -6,21 +6,22 @@
     }
 
     class identityService {
-        static serviceId = 'identityService';
-        currentUser: any;
+        public static serviceId = 'identityService';
+        public currentUser: any;
 
         constructor() {
 
         }
 
-        isAuthenticated() {
+        public isAuthenticated() {
             return !!this.currentUser;
         }
 
-        isAuthorized(role: string):boolean {
+        public isAuthorized(role: string): boolean {
             return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
         }
     }
+
     var app = angular.module('app');
     app.factory(identityService.serviceId, [() => new identityService()]);
-} 
+}

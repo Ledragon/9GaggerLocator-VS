@@ -16,6 +16,21 @@ var app;
                 });
                 return defered.promise;
             };
+            userService.prototype.getNumberByCountry = function () {
+                var defered = this.$q.defer();
+                this.getAll().then(function (users) {
+                    var grouped = _.groupBy(users, function (u) { return u.country; });
+                    var result = [];
+                    for (var key in grouped) {
+                        result.push({
+                            country: key,
+                            count: grouped[key].length
+                        });
+                    }
+                    defered.resolve(result);
+                });
+                return defered.promise;
+            };
             return userService;
         })();
         var app = angular.module('app');

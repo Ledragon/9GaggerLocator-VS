@@ -1,15 +1,31 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
-module app{
-        var app = angular.module('app');
-        var routeRoleChecks = {
-            admin: {
-                auth(authenticationService) {
-                    return authenticationService.authorizeCurrentUserForRoute('admin');
+module app {
+    var app = angular.module('app');
+    var routeRoleChecks = {
+        admin: {
+            auth(authenticationService: Services.IauthenticationService) {
+                return authenticationService.authorizeCurrentUserForRoute('admin');
+            }
+        }
+    };
+
+    var routeAuthenticationCheck = {
+        isAuthenticated: {
+            auth(identityService: Services.IidentityService,
+                $q: ng.IQService): any {
+                console.log('Is user authenticated?');
+                if (identityService.isAuthenticated()) {
+                    console.log('yes');
+                    return false;
+                } else {
+                    console.log('no');
+                    return $q.reject('Not authenticated');
                 }
             }
-        };
-
-        app.config(['$stateProvider', '$urlRouterProvider',($stateProvider, $urlRouterProvider) => {
+        }
+    };
+    app.config([
+        '$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
             $urlRouterProvider.otherwise('/home');
             $stateProvider
                 .state('notFound', {
@@ -36,7 +52,15 @@ module app{
                     url: '/overview',
                     templateUrl: 'app/interaction/overview.html',
                     controller: 'OverviewController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    resolve: routeAuthenticationCheck.isAuthenticated
+                })
+                .state('profile', {
+                    url: '/profile',
+                    templateUrl: 'app/account/profile.html',
+                    controller: 'profileController',
+                    controllerAs: 'vm',
+                    resolve: routeAuthenticationCheck.isAuthenticated
                 })
                 .state('notAuthorized', {
                     url: '/notauthorized',
@@ -49,5 +73,6 @@ module app{
                     controllerAs: 'vm',
                     resolve: routeRoleChecks.admin
                 });
-        }]);
+        }
+    ]);
 }

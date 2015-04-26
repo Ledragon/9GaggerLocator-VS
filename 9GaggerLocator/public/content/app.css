@@ -2,3 +2,6 @@
     -ms-border-radius: 50%;
     border-radius: 50%;
 }
+.normal {
+    fill: #808080;
+}

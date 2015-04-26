@@ -16,16 +16,14 @@
                     <th></th>
                     <th>User name</th>
                     <th>Gender</th>
-                    <th>Country</th>
                 </tr>
                 <tr ng-repeat="user in vm.users" >
                     <td style="color:red">&#9679;</td>
-                    <td>{{user.userName}}</td>
+                    <td><i class="ld-flag flag-icon flag-icon-squared" ng-class="vm.flag(user.countryIsoA2)" title="{{user.country}}"></i>&nbsp; {{user.userName}}</td>
                     <td>
                         <i class="fa fa-mars" ng-if="user.gender==='Male'"></i>
                         <i class="fa fa-venus" ng-if="user.gender==='Female'"></i>
                     </td>
-                    <td title="{{user.country}}"><i class="ld-flag flag-icon flag-icon-squared" ng-class="vm.flag(user.countryIsoA2)"></i></td>
                 </tr>
             </table>
         </div>
