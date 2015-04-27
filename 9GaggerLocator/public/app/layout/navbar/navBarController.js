@@ -12,6 +12,9 @@ var app;
                 $scope.$watch(function () { return identityService.currentUser; }, function () {
                     self.currentUser = identityService.currentUser;
                 });
+                $scope.$watch(function () { return $state.current; }, function () {
+                    self.currentState = $state.current.name;
+                });
             }
             navBarController.prototype.signout = function () {
                 var self = this;

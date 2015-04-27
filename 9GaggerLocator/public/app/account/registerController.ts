@@ -22,6 +22,7 @@ module app.Controllers {
         public firstName: string;
         public lastName: string;
         public country:string;
+        public gender:string;
         public registerForm: IregisterForm;
         countries=[];
 
@@ -46,7 +47,8 @@ module app.Controllers {
                 password: this.password,
                 firstName: this.firstName,
                 lastName: this.lastName,
-                country: this.country
+                country: this.country,
+                gender:this.gender
             };
 
             console.log(newUser);

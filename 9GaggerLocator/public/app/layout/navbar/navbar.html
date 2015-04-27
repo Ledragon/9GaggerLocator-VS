@@ -9,19 +9,23 @@
             </button>
             <a class="navbar-brand" ui-sref="home">
                 <span class="fa fa-map-marker"></span> 9
+                <!--<img src="http://www.android-user.de/wp-content/uploads/2014/01/33174-icon-9gag-app.png" style="width: 32px;" />-->
             </a>
         </div>
 
         <div class="collapse navbar-collapse navbar-left" id="example">
             <ul class="nav navbar-nav ">
-                <li ng-if="!vm.currentUser">
+                <li ng-if="!vm.currentUser" ng-class="{'active': vm.currentState === 'login'}">
                     <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
                 </li>
-                <li ng-if="!vm.currentUser">
+                <li ng-if="!vm.currentUser" ng-class="{'active': vm.currentState === 'register'}">
                     <a ui-sref="register"><span class="fa fa-user"></span> Register</a>
                 </li>
-                <li ng-if="vm.currentUser">
+                <li ng-if="vm.currentUser" ng-class="{'active': vm.currentState === 'overview'}">
                     <a ui-sref="overview"><span class="fa fa-users"></span> Users</a>
+                </li>
+                <li ng-if="vm.currentUser" ng-class="{'active': vm.currentState === 'chat'}">
+                    <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
                 </li>
             </ul>
         </div>

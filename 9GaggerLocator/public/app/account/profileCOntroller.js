@@ -9,6 +9,7 @@ var app;
                 this.user = new app.Models.user();
                 this.user.country = identityService.currentUser.country;
                 this.user.userName = identityService.currentUser.username;
+                this.user.gender = identityService.currentUser.gender;
                 this.user.avatar = 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTthKSlaeZZiuBm2Ya43nDi8yKcy_ESbXkAWhK32bDkxGTV9esRdsML8Q';
             }
             profileController.controllerId = 'profileController';

@@ -11,6 +11,7 @@
     class navBarController implements InavBarController {
         public static controllerId = 'navBarController';
         public currentUser: any;
+        private currentState:string;
 
         constructor($scope: InavBarScope,
             private $state: ng.ui.IStateService,
@@ -21,6 +22,9 @@
             var self = this;
             $scope.$watch(() => identityService.currentUser, () => {
                 self.currentUser = identityService.currentUser;
+            });
+            $scope.$watch(() => $state.current, () => {
+                self.currentState = $state.current.name;
             });
         }
 

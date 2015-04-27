@@ -26,7 +26,8 @@ var app;
                     password: this.password,
                     firstName: this.firstName,
                     lastName: this.lastName,
-                    country: this.country
+                    country: this.country,
+                    gender: this.gender
                 };
                 console.log(newUser);
                 var self = this;

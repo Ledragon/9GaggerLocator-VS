@@ -19,7 +19,8 @@ var userSchema = mongoose.Schema({
     state: String,
     city: String,
     latitude: Number,
-    longitude: Number
+    longitude: Number,
+    gender:String
 });
 
 userSchema.methods = {
@@ -38,6 +39,8 @@ function createDefaultUsers() {
                 firstName: 'Hugues',
                 lastName: 'Stefanski',
                 username: 'ledragon',
+                gender: 'Male',
+                country: 'Belgium',
                 salt: salt,
                 hashed_pwd: hash,
                 roles: ['admin']
@@ -51,6 +54,8 @@ function createDefaultUsers() {
                 username: 'Joe',
                 salt: salt,
                 hashed_pwd: hash,
+                gender: 'Male',
+                country: 'United States',
                 roles: []
             });
             salt = crypto.createSalt();
@@ -59,6 +64,8 @@ function createDefaultUsers() {
                 firstName: 'John',
                 lastName: 'Papa',
                 username: 'John',
+                gender: 'Male',
+                country: 'United States',
                 salt: salt,
                 hashed_pwd: hash
             });

@@ -10,7 +10,7 @@
                         <label class="control-label">User name</label>
                     </div>
                     <div class="col-xs-8">
-                        <input class="input-sm form-control" ng-model="vm.userName" required name="userName"/>
+                        <input class="input-sm form-control" ng-model="vm.userName" required name="userName" />
                         <i class="fa fa-exclamation-circle form-control-feedback" ng-if="vm.registerForm.userName.$touched && !vm.registerForm.userName.$valid"></i>
                     </div>
                 </div>
@@ -38,6 +38,26 @@
                         <select class="input-sm form-control" ng-model="vm.country" ng-options="country.name as country.name for country in vm.countries | orderBy : 'name'"></select>
                         <!--<input  type="text"  required/>-->
                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <label class="control-label">Gender</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="gender" ng-model="vm.gender" value="Male" />
+                                <i class="fa fa-mars"></i>
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="gender" ng-model="vm.gender" value="Female" />
+                                <i class="fa fa-venus"></i>
+                            </label>
+                            <!--<input type="text" required/>-->
+                        </div>
+                        </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-4">

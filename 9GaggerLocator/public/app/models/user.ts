@@ -4,5 +4,6 @@
         public userName: string;
         public countryIsoA2: string;
         public avatar: string;
+        public gender:string;
     }
 }
