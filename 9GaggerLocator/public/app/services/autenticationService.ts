@@ -4,6 +4,7 @@ module app.Services {
         login(userName: string, password: string): ng.IPromise<any>;
         logoutUser(): ng.IPromise<any>;
         authorizeCurrentUserForRoute(role: string): any;
+        authorizeAuthenticatedUserForRoute(): any;
         createUser(user: any): ng.IPromise<any>;
     }
 
@@ -52,6 +53,14 @@ module app.Services {
                 return false;
             } else {
                 return this.$q.reject('Not authorized');
+            }
+        }
+
+        public authorizeAuthenticatedUserForRoute(): any {
+            if (this.identityService.isAuthenticated()) {
+                return false;
+            } else {
+                return this.$q.reject('Not authenticated');
             }
         }
 

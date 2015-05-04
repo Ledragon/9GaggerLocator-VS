@@ -11,16 +11,8 @@ module app {
 
     var routeAuthenticationCheck = {
         isAuthenticated: {
-            auth(identityService: Services.IidentityService,
-                $q: ng.IQService): any {
-                console.log('Is user authenticated?');
-                if (identityService.isAuthenticated()) {
-                    console.log('yes');
-                    return false;
-                } else {
-                    console.log('no');
-                    return $q.reject('Not authenticated');
-                }
+            auth(authenticationService: Services.IauthenticationService): any {
+                return authenticationService.authorizeAuthenticatedUserForRoute();
             }
         }
     };

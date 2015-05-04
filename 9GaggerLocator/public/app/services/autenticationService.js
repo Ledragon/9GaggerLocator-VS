@@ -49,6 +49,14 @@ var app;
                     return this.$q.reject('Not authorized');
                 }
             };
+            authenticationService.prototype.authorizeAuthenticatedUserForRoute = function () {
+                if (this.identityService.isAuthenticated()) {
+                    return false;
+                }
+                else {
+                    return this.$q.reject('Not authenticated');
+                }
+            };
             authenticationService.prototype.createUser = function (user) {
                 var deferred = this.$q.defer();
                 var userResource = new this.userResource(user);

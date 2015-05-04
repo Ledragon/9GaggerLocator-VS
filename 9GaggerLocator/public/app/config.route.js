@@ -11,16 +11,8 @@ var app;
     };
     var routeAuthenticationCheck = {
         isAuthenticated: {
-            auth: function (identityService, $q) {
-                console.log('Is user authenticated?');
-                if (identityService.isAuthenticated()) {
-                    console.log('yes');
-                    return false;
-                }
-                else {
-                    console.log('no');
-                    return $q.reject('Not authenticated');
-                }
+            auth: function (authenticationService) {
+                return authenticationService.authorizeAuthenticatedUserForRoute();
             }
         }
     };
