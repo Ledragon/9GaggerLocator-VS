@@ -16,6 +16,7 @@
                     <th></th>
                     <th>User name</th>
                     <th>Gender</th>
+                    <th></th>
                 </tr>
                 <tr ng-repeat="user in vm.users" >
                     <td style="color:red">&#9679;</td>
@@ -23,6 +24,9 @@
                     <td>
                         <i class="fa fa-mars" ng-if="user.gender==='Male'" style="color: blue;"></i>
                         <i class="fa fa-venus" ng-if="user.gender==='Female'" style="color: pink;"></i>
+                    </td>
+                    <td>
+                        <i class="fa fa-envelope-o" ng-click="vm.sendMessage()"></i>
                     </td>
                 </tr>
             </table>
