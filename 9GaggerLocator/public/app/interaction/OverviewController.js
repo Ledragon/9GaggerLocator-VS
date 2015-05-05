@@ -1,5 +1,4 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/socket.io-client/socket.io-client.d.ts" />
 var app;
 (function (app_1) {
     var Controllers;
@@ -19,21 +18,17 @@ var app;
                         }
                     });
                 });
-                //this._socket = io.connect('http://localhost:3030/');
             }
             OverviewController.prototype.flag = function (isoA2) {
                 if (isoA2) {
                     return "flag-icon-" + isoA2.toLowerCase();
                 }
             };
-            OverviewController.prototype.sendMessage = function () {
-                var message = 'a message has been sent';
-                console.log(message);
-            };
             return OverviewController;
         })();
         var app = angular.module('app');
-        app.controller('OverviewController', ['userService', 'geoService', OverviewController]);
+        app.controller('OverviewController', ['userService', 'geoService',
+            OverviewController]);
     })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=OverviewController.js.map

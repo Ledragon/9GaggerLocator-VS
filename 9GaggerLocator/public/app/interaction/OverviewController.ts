@@ -1,5 +1,4 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/socket.io-client/socket.io-client.d.ts" />
 module app.Controllers {
 
     class OverviewController {
@@ -21,8 +20,6 @@ module app.Controllers {
                     }
                 );
             });
-
-            //this._socket = io.connect('http://localhost:3030/');
         }
 
         public flag(isoA2: string): string {
@@ -30,14 +27,10 @@ module app.Controllers {
                 return `flag-icon-${isoA2.toLowerCase() }`;
             }
         }
-
-        public sendMessage() {
-            var message = 'a message has been sent';
-            console.log(message);
-        }
     }
 
     var app = angular.module('app');
-    app.controller('OverviewController', ['userService', 'geoService', OverviewController]);
+    app.controller('OverviewController', ['userService', 'geoService',
+        OverviewController]);
 
 }

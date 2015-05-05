@@ -5,5 +5,9 @@ exports.init = function(server) {
     console.log('Hello socket io');
     io.on('connection', function(socket) {
         console.log('Client connected');
+        socket.on('message', function(userName, message) {
+            console.log(userName+ ' says ' +message);
+            io.emit('message', userName, message);
+        });
     });
 };

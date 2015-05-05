@@ -1,16 +1,27 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 var app;
-(function (_app) {
+(function (app_1) {
     var Controllers;
     (function (Controllers) {
         var ChatController = (function () {
-            function ChatController() {
+            function ChatController($scope, realTimeService) {
+                this.realTimeService = realTimeService;
+                var self = this;
+                this.chatText = 'Chat text';
+                this.realTimeService.on('message', function (userName, message) {
+                    self.chatText = self.chatText + '\n' + userName + ': ' + message;
+                    $scope.$apply();
+                });
             }
+            ChatController.prototype.send = function () {
+                this.realTimeService.emit('message', this.message);
+                this.message = '';
+            };
             ChatController.controllerId = 'ChatController';
             return ChatController;
         })();
         var app = angular.module('app');
-        app.controller(ChatController.controllerId, [ChatController]);
-    })(Controllers = _app.Controllers || (_app.Controllers = {}));
+        app.controller(ChatController.controllerId, ['$scope', 'realTimeService', function ($scope, realTimeService) { return new ChatController($scope, realTimeService); }]);
+    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=chatController.js.map

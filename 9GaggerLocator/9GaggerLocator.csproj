@@ -271,6 +271,7 @@
     <TypeScriptCompile Include="public\app\services\autenticationService.ts" />
     <TypeScriptCompile Include="public\app\services\d3Service.ts" />
     <TypeScriptCompile Include="public\app\services\geoService.ts" />
+    <TypeScriptCompile Include="public\app\services\realTimeService.ts" />
     <TypeScriptCompile Include="public\app\services\userService.ts" />
     <Content Include="public\bower\angular-animate\angular-animate.js" />
     <Content Include="public\bower\angular-animate\angular-animate.min.js" />
