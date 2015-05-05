@@ -24,7 +24,7 @@ module.exports = function (app) {
         geoController.getCountries
     );
 
-    app.get('*', function (request, response) {
+    app.get('/', function (request, response) {
         response.render('index.html');
     });
 

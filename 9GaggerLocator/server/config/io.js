@@ -1,14 +1,9 @@
-﻿var io = require('socket.io');
-var http = require('http');
-
-exports.init = function (app) {
-    var server = http.createServer(app);
-    server.listen(3000);
-    //console.log(server);
-    var tmp = io(server);
+﻿var socketio = require('socket.io');
+var io;
+exports.init = function(server) {
+    io = socketio.listen(server);
     console.log('Hello socket io');
-    tmp.on('connection', function(socket) {
+    io.on('connection', function(socket) {
         console.log('Client connected');
     });
-    //console.log(tmp);
 };

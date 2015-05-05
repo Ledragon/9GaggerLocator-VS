@@ -22,7 +22,7 @@ module app.Controllers {
                 );
             });
 
-            this._socket = io.connect('http://localhost:3000');
+            //this._socket = io.connect('http://localhost:3030/');
         }
 
         public flag(isoA2: string): string {

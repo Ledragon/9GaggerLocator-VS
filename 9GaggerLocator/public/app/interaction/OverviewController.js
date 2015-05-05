@@ -19,7 +19,7 @@ var app;
                         }
                     });
                 });
-                this._socket = io.connect('http://localhost:3000');
+                //this._socket = io.connect('http://localhost:3030/');
             }
             OverviewController.prototype.flag = function (isoA2) {
                 if (isoA2) {
