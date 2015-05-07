@@ -52,8 +52,8 @@ var app;
             }).state('chat', {
                 url: '/chat',
                 templateUrl: 'app/interaction/chat.html',
-                controller: 'ChatController',
-                controllerAs: 'vm',
+                //controller: 'profileController',
+                //controllerAs: 'vm',
                 resolve: routeAuthenticationCheck.isAuthenticated
             }).state('notAuthorized', {
                 url: '/notauthorized',

@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 var app;
-(function (app_1) {
+(function (_app) {
     var Controllers;
     (function (Controllers) {
         var ChatController = (function () {
@@ -22,6 +22,6 @@ var app;
         })();
         var app = angular.module('app');
         app.controller(ChatController.controllerId, ['$scope', 'realTimeService', function ($scope, realTimeService) { return new ChatController($scope, realTimeService); }]);
-    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
+    })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=chatController.js.map

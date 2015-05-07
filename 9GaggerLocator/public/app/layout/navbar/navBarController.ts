@@ -11,13 +11,14 @@
     class navBarController implements InavBarController {
         public static controllerId = 'navBarController';
         public currentUser: any;
-        private currentState:string;
+        private currentState: string;
 
         constructor($scope: InavBarScope,
             private $state: ng.ui.IStateService,
             identityService: Services.IidentityService,
             private authenticationService: Services.IauthenticationService,
-            private notifierService: Services.InotificationService) {
+            private notifierService: Services.InotificationService,
+            private realTimeService: Services.IrealTimeService) {
             $scope.vm = this;
             var self = this;
             $scope.$watch(() => identityService.currentUser, () => {
@@ -25,6 +26,12 @@
             });
             $scope.$watch(() => $state.current, () => {
                 self.currentState = $state.current.name;
+            });
+
+            realTimeService.on('message-sent', (userName, message) => {
+                if (message.to.userName === identityService.currentUser.username) {
+                    notifierService.success(`You received a message from ${message.from.username}`);
+                }
             });
         }
 
@@ -40,8 +47,8 @@
     var app = angular.module('app');
     app.controller(navBarController.controllerId,
     [
-        '$scope', '$state', 'identityService', 'authenticationService', 'notifierService',
-        ($scope, $state, identityService, authenticationService, notifierService) =>
-        new navBarController($scope, $state, identityService, authenticationService, notifierService)
+        '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',
+        ($scope, $state, identityService, authenticationService, notifierService, realTimeService) =>
+        new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService)
     ]);
 }

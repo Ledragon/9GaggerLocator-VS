@@ -1,12 +1,13 @@
 var app;
-(function (_app) {
+(function (app_1) {
     var Controllers;
     (function (Controllers) {
         var navBarController = (function () {
-            function navBarController($scope, $state, identityService, authenticationService, notifierService) {
+            function navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService) {
                 this.$state = $state;
                 this.authenticationService = authenticationService;
                 this.notifierService = notifierService;
+                this.realTimeService = realTimeService;
                 $scope.vm = this;
                 var self = this;
                 $scope.$watch(function () { return identityService.currentUser; }, function () {
@@ -14,6 +15,11 @@ var app;
                 });
                 $scope.$watch(function () { return $state.current; }, function () {
                     self.currentState = $state.current.name;
+                });
+                realTimeService.on('message-sent', function (userName, message) {
+                    if (message.to.userName === identityService.currentUser.username) {
+                        notifierService.success("You received a message from " + message.from.username);
+                    }
                 });
             }
             navBarController.prototype.signout = function () {
@@ -28,13 +34,11 @@ var app;
         })();
         var app = angular.module('app');
         app.controller(navBarController.controllerId, [
-            '$scope',
-            '$state',
-            'identityService',
-            'authenticationService',
-            'notifierService',
-            function ($scope, $state, identityService, authenticationService, notifierService) { return new navBarController($scope, $state, identityService, authenticationService, notifierService); }
+            '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',
+            function ($scope, $state, identityService, authenticationService, notifierService, realTimeService) {
+                return new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService);
+            }
         ]);
-    })(Controllers = _app.Controllers || (_app.Controllers = {}));
+    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=navBarController.js.map
