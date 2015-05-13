@@ -25,6 +25,9 @@ var app;
                         }
                     });
                 });
+                this.realTimeService.on('message-sent', function () {
+                    toastr.success('yay');
+                });
             }
             OverviewController.prototype.flag = function (isoA2) {
                 if (isoA2) {

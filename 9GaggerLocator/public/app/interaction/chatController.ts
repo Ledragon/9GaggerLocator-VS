@@ -10,8 +10,8 @@ module app.Controllers {
 
     }
 
-    class ChatController implements IchatController {
-        public static controllerId = 'ChatController';
+    class chatController implements IchatController {
+        public static controllerId = 'chatController';
         public message: string;
         public chatText: string;
 
@@ -31,6 +31,6 @@ module app.Controllers {
     }
 
     var app = angular.module('app');
-    app.controller(ChatController.controllerId, ['$scope', 'realTimeService', ($scope, realTimeService) => new ChatController($scope, realTimeService)]);
+    app.controller(chatController.controllerId, ['$scope', 'realTimeService', ($scope, realTimeService) => new chatController($scope, realTimeService)]);
 
 }

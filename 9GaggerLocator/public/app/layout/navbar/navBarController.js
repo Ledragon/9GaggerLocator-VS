@@ -1,5 +1,5 @@
 var app;
-(function (app_1) {
+(function (_app) {
     var Controllers;
     (function (Controllers) {
         var navBarController = (function () {
@@ -10,6 +10,7 @@ var app;
                 this.realTimeService = realTimeService;
                 $scope.vm = this;
                 var self = this;
+                this.unread = 0;
                 $scope.$watch(function () { return identityService.currentUser; }, function () {
                     self.currentUser = identityService.currentUser;
                 });
@@ -19,6 +20,8 @@ var app;
                 realTimeService.on('message-sent', function (userName, message) {
                     if (message.to.userName === identityService.currentUser.username) {
                         notifierService.success("You received a message from " + message.from.username);
+                        self.unread += 1;
+                        $scope.$apply();
                     }
                 });
             }
@@ -34,11 +37,14 @@ var app;
         })();
         var app = angular.module('app');
         app.controller(navBarController.controllerId, [
-            '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',
-            function ($scope, $state, identityService, authenticationService, notifierService, realTimeService) {
-                return new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService);
-            }
+            '$scope',
+            '$state',
+            'identityService',
+            'authenticationService',
+            'notifierService',
+            'realTimeService',
+            function ($scope, $state, identityService, authenticationService, notifierService, realTimeService) { return new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService); }
         ]);
-    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
+    })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=navBarController.js.map

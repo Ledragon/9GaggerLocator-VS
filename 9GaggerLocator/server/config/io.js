@@ -11,7 +11,7 @@ exports.init = function(server) {
         });
 
         socket.on('message-sent', function (userName, args) {
-            console.log('User ' + userName + ' sent a message to ' + args[0].to);
+            console.log('User ' + userName + ' sent a message to ' + args[0].to.userName);
             io.emit('message-sent', userName, args[0]);
         });
     });

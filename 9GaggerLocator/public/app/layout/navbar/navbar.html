@@ -41,14 +41,16 @@
                     </li>
                     <li>
                         <a ui-sref="profile">Profile</a>
-                    </li><li>
+                    </li>
+                    <li>
                         <a href="" ng-click="vm.signout()">Sign out</a>
                     </li>
                 </ul>
             </li>
         </ul>
         <div class="navbar-text navbar-right" ng-show="vm.currentUser">
-            <i class="fa fa-envelope-o"></i>
+            <i class="fa fa-envelope fa-adjust"></i>
+            <span class="badge">{{vm.unread}}</span>
         </div>
     </div>
 </nav>

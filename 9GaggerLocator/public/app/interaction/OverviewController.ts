@@ -33,6 +33,9 @@ module app.Controllers {
                     }
                 );
             });
+            this.realTimeService.on('message-sent', () => {
+                toastr.success('yay');
+            });
         }
 
         public flag(isoA2: string): string {

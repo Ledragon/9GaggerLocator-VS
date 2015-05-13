@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/geojson/geojson.d.ts" />
 var app;
-(function (_app) {
+(function (app_1) {
     var Services;
     (function (Services) {
         var geoService = (function () {
@@ -10,10 +10,12 @@ var app;
             }
             geoService.prototype.getCountries = function () {
                 var defered = this.$q.defer();
-                this.$http.get('api/countries').success(function (data) {
+                this.$http.get('api/countries')
+                    .success(function (data) {
                     //topojson format
                     defered.resolve(data);
-                }).error((function (reason) {
+                })
+                    .error((function (reason) {
                     defered.reject(reason);
                 }));
                 return defered.promise;
@@ -33,15 +35,31 @@ var app;
                 });
                 return defered.promise;
             };
+            geoService.prototype.findMe = function () {
+                var defered = this.$q.defer();
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    //self.user.latitude = position.coords.latitude;
+                    //self.user.longitude = position.coords.longitude;
+                    //var country = self.mapService.getCountry(self.user.longitude, self.user.latitude);
+                    //if (country) {
+                    //    self.user.country = country.properties.name;
+                    //}
+                    defered.resolve(position);
+                }, function (reason) {
+                    defered.reject(reason);
+                });
+                return defered.promise;
+            };
             geoService.serviceId = 'geoService';
             return geoService;
         })();
         var app = angular.module('app');
         app.factory(geoService.serviceId, [
-            '$http',
-            '$q',
-            function ($http, $q) { return new geoService($http, $q); }
+            '$http', '$q',
+            function ($http, $q) {
+                return new geoService($http, $q);
+            }
         ]);
-    })(Services = _app.Services || (_app.Services = {}));
+    })(Services = app_1.Services || (app_1.Services = {}));
 })(app || (app = {}));
 //# sourceMappingURL=geoService.js.map

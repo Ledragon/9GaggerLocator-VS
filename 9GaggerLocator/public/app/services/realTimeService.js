@@ -6,9 +6,7 @@ var app;
         var realTimeService = (function () {
             function realTimeService(identityService) {
                 this.identityService = identityService;
-                if (!this._socket) {
-                    this._socket = io();
-                }
+                this._socket = io();
             }
             realTimeService.prototype.emit = function (event) {
                 var args = [];

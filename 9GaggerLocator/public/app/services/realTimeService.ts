@@ -11,9 +11,7 @@ module app.Services {
         private _socket: SocketIOClient.Socket;
 
         constructor(private identityService: Services.IidentityService) {
-            if (!this._socket) {
-                this._socket = io();
-            }
+            this._socket = io();
         }
 
         public emit(event, ...args: Array<any>) {

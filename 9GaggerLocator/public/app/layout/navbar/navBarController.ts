@@ -12,6 +12,7 @@
         public static controllerId = 'navBarController';
         public currentUser: any;
         private currentState: string;
+        public unread: number;
 
         constructor($scope: InavBarScope,
             private $state: ng.ui.IStateService,
@@ -21,6 +22,7 @@
             private realTimeService: Services.IrealTimeService) {
             $scope.vm = this;
             var self = this;
+            this.unread = 0;
             $scope.$watch(() => identityService.currentUser, () => {
                 self.currentUser = identityService.currentUser;
             });
@@ -31,6 +33,8 @@
             realTimeService.on('message-sent', (userName, message) => {
                 if (message.to.userName === identityService.currentUser.username) {
                     notifierService.success(`You received a message from ${message.from.username}`);
+                    self.unread += 1;
+                    $scope.$apply();
                 }
             });
         }

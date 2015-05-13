@@ -5,6 +5,7 @@ module app.Services {
         getCountries(): ng.IPromise<TopoJSON.TopoJSONObject>;
         getGeoJSON(topojsonObjects: any): GeoJSON.FeatureCollection;
         getCountry(countryName: string): ng.IPromise<any>;
+        findMe(): ng.IPromise<Position>;
     }
 
     class geoService implements IgeoService {
@@ -17,7 +18,7 @@ module app.Services {
             var defered = this.$q.defer();
             this.$http.get('api/countries')
                 .success((data) => {
-                //topojson format
+                    //topojson format
                     defered.resolve(data);
                 })
                 .error(((reason) => {
@@ -36,8 +37,25 @@ module app.Services {
             var defered = this.$q.defer();
             this.getCountries().then((data) => {
                 var geo = this.getGeoJSON(data);
-                var country = _.find(geo.features, (f:any) => f.properties.name === countryName);
+                var country = _.find(geo.features, (f: any) => f.properties.name === countryName);
                 defered.resolve(country);
+            });
+            return defered.promise;
+        }
+
+
+        public findMe():ng.IPromise<Position> {
+            var defered = this.$q.defer();
+           navigator.geolocation.getCurrentPosition((position) => {
+                //self.user.latitude = position.coords.latitude;
+                //self.user.longitude = position.coords.longitude;
+                //var country = self.mapService.getCountry(self.user.longitude, self.user.latitude);
+                //if (country) {
+                //    self.user.country = country.properties.name;
+                //}
+                defered.resolve(position);
+            }, (reason) => {
+                defered.reject(reason);
             });
             return defered.promise;
         }

@@ -57,8 +57,8 @@ module app {
                 .state('chat', {
                     url: '/chat',
                     templateUrl: 'app/interaction/chat.html',
-                    //controller: 'profileController',
-                    //controllerAs: 'vm',
+                    controller: 'chatController',
+                    controllerAs: 'vm',
                     resolve: routeAuthenticationCheck.isAuthenticated
                 })
                 .state('notAuthorized', {
