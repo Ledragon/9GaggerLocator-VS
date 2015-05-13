@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 var app;
-(function (_app) {
+(function (app) {
     var Controllers;
     (function (Controllers) {
         var message = (function () {
@@ -9,9 +9,11 @@ var app;
             return message;
         })();
         var OverviewController = (function () {
-            function OverviewController(userService, geoService, identityService, realTimeService) {
+            function OverviewController(userService, geoService, identityService, realTimeService, notifierService) {
+                this.geoService = geoService;
                 this.identityService = identityService;
                 this.realTimeService = realTimeService;
+                this.notifierService = notifierService;
                 var self = this;
                 userService.getAll().then(function (data) {
                     self.users = data;
@@ -44,10 +46,30 @@ var app;
                 this._message.content = this.messageContent;
                 this.realTimeService.emit('message-sent', this._message);
             };
+            OverviewController.prototype.nearMe = function () {
+                this.position = {
+                    coords: {
+                        longitude: this.identityService.currentUser.longitude,
+                        latitude: this.identityService.currentUser.latitude
+                    }
+                };
+                //this.identityService.currentUser
+                //this.geoService.findMe().then((position) => {
+                //    this.position = position;
+                //}, (reason: any) => {
+                //    this.notifierService.error(reason);
+                //});
+            };
+            OverviewController.prototype.sameCountry = function (user) {
+                return user.country === this.identityService.currentUser.country;
+            };
             return OverviewController;
         })();
-        var app = angular.module('app');
-        app.controller('OverviewController', ['userService', 'geoService', 'identityService', 'realTimeService', OverviewController]);
-    })(Controllers = _app.Controllers || (_app.Controllers = {}));
+        angular.module('app')
+            .controller('OverviewController', [
+            'userService', 'geoService', 'identityService', 'realTimeService', 'notifierService',
+            OverviewController
+        ]);
+    })(Controllers = app.Controllers || (app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=OverviewController.js.map

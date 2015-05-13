@@ -1,7 +1,7 @@
 ﻿var mongoose = require('mongoose');
 var crypto = require('../utilities/encryption');
 
-exports.createDefaultUsers  =createDefaultUsers;
+exports.createDefaultUsers = createDefaultUsers;
 
 
 var userSchema = mongoose.Schema({
@@ -20,18 +20,18 @@ var userSchema = mongoose.Schema({
     city: String,
     latitude: Number,
     longitude: Number,
-    gender:String
+    gender: String
 });
 
 userSchema.methods = {
-    authenticate: function (password) {
+    authenticate: function(password) {
         return crypto.hashPassword(this.salt, password) === this.hashed_pwd;
     }
-}
-
+};
 var User = mongoose.model('User', userSchema);
+
 function createDefaultUsers() {
-    User.find({}).exec(function (err, collection) {
+    User.find({}).exec(function(err, collection) {
         if (collection.length === 0) {
             var salt = crypto.createSalt();
             var hash = crypto.hashPassword(salt, 'hugues');
@@ -41,9 +41,13 @@ function createDefaultUsers() {
                 username: 'ledragon',
                 gender: 'Male',
                 country: 'Belgium',
+                state: 'Liege',
+                city: 'Oupeye',
                 salt: salt,
                 hashed_pwd: hash,
-                roles: ['admin']
+                roles: ['admin'],
+                latitude: 50,
+                longitude: 5
             });
 
             salt = crypto.createSalt();
@@ -56,7 +60,11 @@ function createDefaultUsers() {
                 hashed_pwd: hash,
                 gender: 'Male',
                 country: 'United States',
-                roles: []
+                state: 'Utah',
+                city: 'Salt Lake City',
+                roles: [],
+                latitude: 40.75,
+                longitude: -111.883333
             });
             salt = crypto.createSalt();
             hash = crypto.hashPassword(salt, 'john');
@@ -66,8 +74,12 @@ function createDefaultUsers() {
                 username: 'John',
                 gender: 'Male',
                 country: 'United States',
+                state: 'California',
+                city:'San Francisco',
                 salt: salt,
-                hashed_pwd: hash
+                hashed_pwd: hash,
+                latitude: 37.783333,
+                longitude: -122.416667
             });
         }
     });

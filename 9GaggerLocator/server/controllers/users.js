@@ -1,6 +1,7 @@
 ﻿var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var crypto = require('../utilities/encryption');
+var _ = require('lodash');
 exports.getUsers = function(request, response) {
     User.find({}).exec(function(error, collection) {
         response.send(collection);
@@ -15,9 +16,14 @@ exports.getUserNames = function(request, response) {
                 result.push({
                     userName: user.username,
                     country: user.country ? user.country : 'United States',
-                    gender: user.gender
+                    state: user.state,
+                    city: user.city,
+                    gender: user.gender,
+                    latitude: user.latitude,
+                    longitude: user.longitude
                 });
             });
+            result = _.sortBy(result, function(r) { return r.country;});
             response.send(result);
         }
     });

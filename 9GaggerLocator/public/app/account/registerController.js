@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/lodash/lodash.d.ts" />
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 var app;
-(function (_app) {
+(function (app_1) {
     var Controllers;
     (function (Controllers) {
         var registerController = (function () {
@@ -18,6 +18,10 @@ var app;
                 }, function (reason) {
                     notifierService.error(reason);
                 });
+                geoService.findMe().then(function (position) {
+                    self.longitude = position.coords.longitude;
+                    self.latitude = position.coords.latitude;
+                });
             }
             registerController.prototype.register = function () {
                 var _this = this;
@@ -27,11 +31,14 @@ var app;
                     firstName: this.firstName,
                     lastName: this.lastName,
                     country: this.country,
-                    gender: this.gender
+                    gender: this.gender,
+                    latitude: this.latitude,
+                    longitude: this.longitude
                 };
                 console.log(newUser);
                 var self = this;
-                this.authenticationService.createUser(newUser).then(function () {
+                this.authenticationService.createUser(newUser)
+                    .then(function () {
                     _this.notifierService.success('user created');
                     _this.$state.go('overview');
                 }, function (reason) {
@@ -56,13 +63,11 @@ var app;
         })();
         var app = angular.module('app');
         app.controller(registerController.controllerId, [
-            '$scope',
-            '$state',
-            'authenticationService',
-            'geoService',
-            'notifierService',
-            function ($scope, $state, authenticationService, geoService, notifierService) { return new registerController($scope, $state, authenticationService, geoService, notifierService); }
+            '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',
+            function ($scope, $state, authenticationService, geoService, notifierService) {
+                return new registerController($scope, $state, authenticationService, geoService, notifierService);
+            }
         ]);
-    })(Controllers = _app.Controllers || (_app.Controllers = {}));
+    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=registerController.js.map

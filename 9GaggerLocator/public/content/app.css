@@ -1,7 +1,11 @@
 ﻿.ld-flag {
-    -ms-border-radius: 50%;
-    border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
 }
 .normal {
-    fill: #808080;
+  fill: #808080;
 }
+.same-country {
+  color: #2AD0B8;
+}
+/*# sourceMappingURL=app.css.map */

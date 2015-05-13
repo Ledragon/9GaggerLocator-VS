@@ -11,36 +11,42 @@ module app.Controllers {
         register(): void;
     }
 
-    interface IregisterForm extends  ng.IFormController{
-        userName:ng.INgModelController;
+    interface IregisterForm extends ng.IFormController {
+        userName: ng.INgModelController;
     }
 
     class registerController implements IregisterController {
-        public static controllerId='RegisterController';
-        public userName: string;
-        public password: string;
-        public firstName: string;
-        public lastName: string;
-        public country:string;
-        public gender:string;
-        public registerForm: IregisterForm;
-        countries=[];
+        static controllerId='RegisterController';
+        userName: string;
+        password: string;
+        firstName: string;
+        lastName: string;
+        country: string;
+        gender: string;
+        registerForm: IregisterForm;
+        longitude: number;
+        latitude:number;
+        countries=<Array<any>>[];
 
         constructor(private $scope: ng.IScope,
             private $state: ng.ui.IStateService,
             private authenticationService: Services.IauthenticationService,
-            geoService:Services.IgeoService,
+            geoService: Services.IgeoService,
             private notifierService: Services.InotificationService) {
             var self = this;
             geoService.getCountries().then((data) => {
                 var geoJson = geoService.getGeoJSON(data);
                 self.countries = _(geoJson.features).pluck('properties').value();
-            }, (reason) => {
+            }, (reason: any) => {
                 notifierService.error(reason);
+            });
+            geoService.findMe().then((position) => {
+                self.longitude = position.coords.longitude;
+                self.latitude = position.coords.latitude;
             });
         }
 
-        public register(): void {
+        register(): void {
 
             var newUser = {
                 username: this.userName,
@@ -48,7 +54,9 @@ module app.Controllers {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 country: this.country,
-                gender:this.gender
+                gender: this.gender,
+                latitude: this.latitude,
+                longitude:this.longitude
             };
 
             console.log(newUser);
@@ -72,18 +80,18 @@ module app.Controllers {
     }
 
     class userViewModel {
-        public userName: string;
-        public password: string;
-        public firstName: string;
-        public lastName: string;
-        public confirmPassword: string;
+        userName: string;
+        password: string;
+        firstName: string;
+        lastName: string;
+        confirmPassword: string;
     }
 
     var app = angular.module('app');
     app.controller(registerController.controllerId,
     [
         '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',
-        ($scope, $state, authenticationService, geoService, notifierService) =>
-            new registerController($scope, $state, authenticationService, geoService, notifierService)
+        ($scope: any, $state: any, authenticationService: any, geoService: any, notifierService: any) =>
+        new registerController($scope, $state, authenticationService, geoService, notifierService)
     ]);
 }

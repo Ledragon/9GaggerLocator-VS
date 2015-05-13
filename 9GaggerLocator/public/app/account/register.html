@@ -76,6 +76,22 @@
                         <input class="input-sm form-control" type="password" ng-model="vm.confirmPassword" required/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <label class="control-label">Longitude</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <input class="input-sm form-control" type="text" ng-model="vm.longitude" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <label class="control-label">Latitude</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <input class="input-sm form-control" type="text" ng-model="vm.latitude" required/>
+                    </div>
+                </div>
                 <div class="btn-group">
                     <button class="btn btn-sm btn-primary" ng-click="vm.register()" ng-disabled="!vm.registerForm.$valid || vm.password !== vm.confirmPassword">Register</button>
                     <button class="btn btn-sm" ui-sref="home">Cancel</button>

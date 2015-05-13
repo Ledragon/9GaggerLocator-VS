@@ -9,22 +9,24 @@ module app.Controllers {
     }
 
     class OverviewController {
-        public users: Array<any>;
+        users: Array<any>;
 
         private _message: message;
-        messageTitle:string;
-        messageContent:string;
+        messageTitle: string;
+        messageContent: string;
+        position: any;
 
         constructor(userService: Services.IuserService,
-            geoService: Services.IgeoService,
+            private geoService: Services.IgeoService,
             private identityService: Services.IidentityService,
-            private realTimeService:Services.IrealTimeService) {
+            private realTimeService: Services.IrealTimeService,
+            private notifierService: Services.InotificationService) {
             var self = this;
-            userService.getAll().then((data) => {
+            userService.getAll().then((data: any) => {
                 self.users = data;
                 self.users.forEach(u => {
                         if (u.country) {
-                            geoService.getCountry(u.country).then((country) => {
+                            geoService.getCountry(u.country).then((country: any) => {
                                 if (country) {
                                     u.countryIsoA2 = country.properties.iso_a2;
                                 }
@@ -38,27 +40,47 @@ module app.Controllers {
             });
         }
 
-        public flag(isoA2: string): string {
+        flag(isoA2: string): string {
             if (isoA2) {
                 return `flag-icon-${isoA2.toLowerCase() }`;
             }
         }
 
-        public sendTo(user) {
+        sendTo(user: any) {
             this._message = new message();
             this._message.from = this.identityService.currentUser;
             this._message.to = user;
         }
 
-        public send() {
+        send() {
             this._message.title = this.messageTitle;
             this._message.content = this.messageContent;
             this.realTimeService.emit('message-sent', this._message);
         }
+
+        nearMe() {
+            this.position = {
+                coords: {
+                    longitude:this.identityService.currentUser.longitude,
+                    latitude:this.identityService.currentUser.latitude
+                }
+            }
+            //this.identityService.currentUser
+            //this.geoService.findMe().then((position) => {
+            //    this.position = position;
+            //}, (reason: any) => {
+            //    this.notifierService.error(reason);
+            //});
+        }
+        sameCountry(user:any) {
+            return user.country === this.identityService.currentUser.country;
+        }
     }
 
-    var app = angular.module('app');
-    app.controller('OverviewController', ['userService', 'geoService', 'identityService','realTimeService',
-        OverviewController]);
+    angular.module('app')
+        .controller('OverviewController', [
+            'userService', 'geoService', 'identityService', 'realTimeService', 'notifierService',
+            OverviewController
+        ]);
 
 }
