@@ -8,7 +8,7 @@ var $ = require('gulp-load-plugins')({
     lazy: true
 });
 
-gulp.task('vet', function () {
+gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp.src(config.alljs)
@@ -19,7 +19,7 @@ gulp.task('vet', function () {
         }));
 });
 
-gulp.task('wiredep', function () {
+gulp.task('wiredep', function() {
     var options = config.getWiredepOptions();
     var wiredep = require('wiredep').stream;
     return gulp
@@ -27,6 +27,18 @@ gulp.task('wiredep', function () {
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js), config.injectOptions))
         .pipe(gulp.dest(config.client));
+});
+
+gulp.task('ts', function() {
+    return gulp
+        .src('./server/utilities/logger.ts')
+        .pipe($.typescript({
+            noImplicitAny: false,
+            declarationFiles: true,
+
+        }))
+        .js
+        .pipe(gulp.dest('./server/utilities'));
 });
 
 // functions

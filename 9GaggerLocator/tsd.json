@@ -22,6 +22,9 @@
     },
     "socket.io-client/socket.io-client.d.ts": {
       "commit": "f3244190e20af6901e865f4cc58127d19216baa1"
+    },
+    "node/node.d.ts": {
+      "commit": "fb3743886bab96ecfefabafb1044ea862de92390"
     }
   }
 }

@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/lodash/lodash.d.ts" />
 /// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 var app;
-(function (app_1) {
+(function (_app) {
     var Controllers;
     (function (Controllers) {
         var registerController = (function () {
@@ -37,8 +37,7 @@ var app;
                 };
                 console.log(newUser);
                 var self = this;
-                this.authenticationService.createUser(newUser)
-                    .then(function () {
+                this.authenticationService.createUser(newUser).then(function () {
                     _this.notifierService.success('user created');
                     _this.$state.go('overview');
                 }, function (reason) {
@@ -63,11 +62,13 @@ var app;
         })();
         var app = angular.module('app');
         app.controller(registerController.controllerId, [
-            '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',
-            function ($scope, $state, authenticationService, geoService, notifierService) {
-                return new registerController($scope, $state, authenticationService, geoService, notifierService);
-            }
+            '$scope',
+            '$state',
+            'authenticationService',
+            'geoService',
+            'notifierService',
+            function ($scope, $state, authenticationService, geoService, notifierService) { return new registerController($scope, $state, authenticationService, geoService, notifierService); }
         ]);
-    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
+    })(Controllers = _app.Controllers || (_app.Controllers = {}));
 })(app || (app = {}));
 //# sourceMappingURL=registerController.js.map

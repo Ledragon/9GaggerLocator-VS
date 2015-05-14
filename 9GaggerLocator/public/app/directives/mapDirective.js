@@ -25,43 +25,32 @@ var Directives;
                 scope.isLoading = true;
                 var width = element.width();
                 var height = width * 3 / 4;
-                var svg = d3.select(element[0])
-                    .append('svg')
-                    .attr({
+                var svg = d3.select(element[0]).append('svg').attr({
                     width: width,
                     height: height
                 });
                 var countriesGroup = svg.append('g');
                 var usersGroup = svg.append('g').classed('users-group', true);
                 var self = this;
-                var mercatorProjection = d3.geo.mercator()
-                    .center([0, 0])
-                    .translate([width / 2, height / 2])
-                    .scale(width / 8);
+                var mercatorProjection = d3.geo.mercator().center([0, 0]).translate([width / 2, height / 2]).scale(width / 8);
                 var pathGenerator = d3.geo.path().projection(mercatorProjection);
                 var geo;
                 this.geoService.getCountries().then(function (countries) {
                     geo = self.geoService.getGeoJSON(countries);
-                    countriesGroup.selectAll('path')
-                        .data(geo.features)
-                        .enter()
-                        .append('g')
-                        .attr('id', function (d, i) { return d.properties.adm0_a3; })
-                        .append('path')
-                        .attr('d', function (d, i) { return pathGenerator(d); })
-                        .classed('normal', true);
+                    countriesGroup.selectAll('path').data(geo.features).enter().append('g').attr('id', function (d, i) { return d.properties.adm0_a3; }).append('path').attr('d', function (d, i) { return pathGenerator(d); }).classed('normal', true);
                     _this.userService.getNumberByCountry().then(function (grouped) {
                         var scale = self.colorScale;
                         scale.domain([
-                            0, d3.max(grouped, function (g) { return g.count; })
+                            0,
+                            d3.max(grouped, function (g) { return g.count; })
                         ]);
                         //self.drawCircles(usersGroup, grouped, geo, pathGenerator);
                         grouped.forEach(function (group) {
-                            var country = _.find(geo.features, function (g) { return g.properties.name === group.country; });
+                            var country = _.find(geo.features, function (g) {
+                                return g.properties.name === group.country;
+                            });
                             if (country) {
-                                countriesGroup.select("#" + country.properties.adm0_a3)
-                                    .select('path')
-                                    .style('fill', scale(group.count));
+                                countriesGroup.select("#" + country.properties.adm0_a3).select('path').style('fill', scale(group.count));
                             }
                         });
                     });
@@ -94,42 +83,31 @@ var Directives;
             var proj = mercatorProjection.center([position.coords.longitude, position.coords.latitude]).scale(8000);
             var projected = proj([position.coords.longitude, position.coords.latitude]);
             var gen = d3.geo.path().projection(proj);
-            countriesGroup.selectAll('path')
-                .data(geo.features)
-                .transition()
-                .attr('d', function (d) { return gen(d); });
-            d3.select('.users-group')
-                .append('circle')
-                .transition()
-                .attr({
+            countriesGroup.selectAll('path').data(geo.features).transition().attr('d', function (d) { return gen(d); });
+            d3.select('.users-group').append('circle').transition().attr({
                 'cx': projected[0],
                 'cy': projected[1],
                 'r': 2
             });
         };
         mapDirective.prototype.drawCircles = function (usersGroup, grouped, geo, pathGenerator) {
-            var group = usersGroup.selectAll('circle')
-                .data(grouped)
-                .enter()
-                .append('g')
-                .attr('transform', function (d, i) {
-                var country = _.find(geo.features, function (g) { return g.properties.name === d.country; });
+            var group = usersGroup.selectAll('circle').data(grouped).enter().append('g').attr('transform', function (d, i) {
+                var country = _.find(geo.features, function (g) {
+                    return g.properties.name === d.country;
+                });
                 if (country) {
                     var center = pathGenerator.centroid(country);
                     return "translate(" + center[0] + "," + center[1] + ")";
                 }
             });
-            group.append('circle')
-                .attr({
+            group.append('circle').attr({
                 'r': 10
             });
-            group.append('text')
-                .attr({
+            group.append('text').attr({
                 'fill': 'white',
                 'y': 5,
                 'text-anchor': 'middle'
-            })
-                .text(function (d, i) { return d.count; });
+            }).text(function (d, i) { return d.count; });
         };
         return mapDirective;
     })();

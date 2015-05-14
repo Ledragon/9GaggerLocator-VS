@@ -226,15 +226,25 @@
     <Content Include="public\bower\jquery\src\sizzle\dist\sizzle.min.map" />
     <Content Include="public\bower\lodash\.bower.json" />
     <Content Include="public\bower\lodash\bower.json" />
-    <Content Include="public\content\app.css" />
+    <Content Include="public\content\app.css.map">
+      <DependentUpon>app.css</DependentUpon>
+    </Content>
+    <None Include="public\content\app.less" />
+    <Content Include="public\content\app.css">
+      <DependentUpon>app.less</DependentUpon>
+    </Content>
+    <Content Include="public\content\app.min.css">
+      <DependentUpon>app.css</DependentUpon>
+    </Content>
     <Content Include="server.js" />
     <Content Include="server\config\auth.js" />
     <Content Include="server\config\passport.js" />
     <Content Include="server\controllers\geo.js" />
     <Content Include="server\controllers\users.js" />
     <Content Include="server\models\user.js" />
+    <Content Include="server\services\geoDataService.js" />
     <Content Include="server\utilities\encryption.js" />
-    <Content Include="server\utilities\logger.js" />
+    <TypeScriptCompile Include="server\utilities\logger.ts" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
     <Content Include="public\bower\d3\d3.min.js.map">
@@ -242,7 +252,9 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="server\data\countries-110m.topo.json" />
+    <Content Include="test\server\geoDataService.spec.js" />
     <Content Include="tsd.json" />
+    <Content Include="server\data\populated-places-10m.geo.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -445,12 +457,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="server\log\" />
+    <Folder Include="test\public\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

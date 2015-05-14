@@ -16,7 +16,11 @@ module.exports = function (app, config) {
     app.use(logger('dev'));
 
     app.use(cookieParser());
-    app.use(bodyParser());
+    //app.use(bodyParser());
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(bodyParser.json());
     app.use(session({
         secret: 'nice unicorns'
     }));
