@@ -25,6 +25,14 @@
         try {
             var map = new LeDragon.Framework.Map.map('test', logger);
             map.drawCountries(countries);
+            map.addPosition(5, 50);
+            map.addPosition(-112, 37, 'red');
+            window.setTimeout(function() {
+                map.centerOnPosition(5, 50);
+                window.setTimeout(function() {
+                    map.centerOnPosition(-112, 37);
+                },2000);
+            },2000);
         } catch (e) {
             logger.errorFormat(e);
         }
