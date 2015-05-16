@@ -3,6 +3,8 @@ var fs = require('fs');
 var logger = require('../utilities/logger');
 var _ = require('lodash');
 
+var cities;
+
 exports.getCountries110m = function(callback) {
     logger.info('Reading countries.');
     var result = [];
@@ -20,31 +22,42 @@ exports.getCountries110m = function(callback) {
 
 exports.getClosestCity = function(longitude, latitude, callback) {
     logger.info('Finding closest city to (\'' + longitude + '\', \'' + latitude + '\').');
-    var url = path.join(__dirname, '../data/populated-places-10m.geo.json');
-    fs.readFile(url, function(error, data) {
-        var result = {};
-        if (error) {
-            logger.error(error);
-        } else {
-            var object = JSON.parse(data);
-            var found = _.min(object.features, function(d) {
-                var difLongitude = d.properties.LONGITUDE - longitude;
-                var difLatitude = d.properties.LATITUDE - latitude;
-                var diff = Math.sqrt(Math.pow(difLongitude, 2) + Math.pow(difLatitude, 2));
-                return diff;
-            });
-            if (found) {
-                var properties = found.properties;
-                logger.info('City found: \'' + properties.NAME + ' (' + properties.LONGITUDE + ', ' + properties.LATITUDE + ')\'.');
-                result = {
-                    name: properties.NAME,
-                    latitude: properties.LATITUDE,
-                    longitude: properties.LONGITUDE
-                };
+    if (!cities) {
+        var url = path.join(__dirname, '../data/populated-places-10m.geo.json');
+        fs.readFile(url, function(error, data) {
+            var result = {};
+            if (error) {
+                logger.error(error);
+                callback(error, result);
             } else {
-                logger.error('No city found.');
+                var object = JSON.parse(data);
+                cities = object;
+                findClosestCity(object, longitude, latitude, callback);
             }
-        }
-        callback(error, result);
+        });
+    } else {
+        findClosestCity(cities, longitude, latitude, callback);
+    }
+};
+
+var findClosestCity = function(list, longitude, latitude, callback) {
+    var found = _.min(list.features, function(d) {
+        var difLongitude = d.properties.LONGITUDE - longitude;
+        var difLatitude = d.properties.LATITUDE - latitude;
+        var diff = Math.sqrt(Math.pow(difLongitude, 2) + Math.pow(difLatitude, 2));
+        return diff;
     });
+    if (found) {
+        var properties = found.properties;
+        logger.info('City found: \'' + properties.NAME + ' (' + properties.LONGITUDE + ', ' + properties.LATITUDE + ')\'.');
+        var result = {
+            name: properties.NAME,
+            latitude: properties.LATITUDE,
+            longitude: properties.LONGITUDE
+        };
+    } else {
+        logger.error('No city found.');
+        var error = 'No city found';
+    }
+    callback(error, result);
 };

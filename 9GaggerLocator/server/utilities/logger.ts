@@ -6,21 +6,18 @@ file = path.join(file, 'server.log');
 
 exports.info = (message: any) => {
     checkLogFile();
-    fs.appendFile(file, `
-${new Date().toISOString()} - [Info] - ${message}`, errorCallback);
+    fs.appendFile(file, `${new Date().toISOString()} - [Info] - ${message}`, errorCallback);
     //console.info(message);
 };
 exports.success = (message: any) => {
     checkLogFile();
-    fs.appendFile(file, `
-${new Date().toISOString()} - [Success] - ${message}`, errorCallback);
+    fs.appendFile(file, `${new Date().toISOString()} - [Success] - ${message}`, errorCallback);
     //console.log(message);
 };
 
 exports.error = (message: any) => {
     checkLogFile();
-    fs.appendFile(file, `
-${new Date().toISOString()} - [Error] - ${message}`, errorCallback);
+    fs.appendFile(file, `${new Date().toISOString()} - [Error] - ${message}`, errorCallback);
     //console.error(message);
 };
 
