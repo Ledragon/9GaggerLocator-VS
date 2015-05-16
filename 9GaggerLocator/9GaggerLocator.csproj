@@ -244,6 +244,7 @@
     <Content Include="server\models\user.js" />
     <Content Include="server\services\geoDataService.js" />
     <Content Include="server\utilities\encryption.js" />
+    <TypeScriptCompile Include="public\framework\map\worldMap.ts" />
     <TypeScriptCompile Include="server\utilities\logger.ts" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
