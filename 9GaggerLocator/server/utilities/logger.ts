@@ -12,7 +12,6 @@ exports.info = (message: any) => {
 exports.success = (message: any) => {
     checkLogFile();
     fs.appendFile(file, `${new Date().toISOString()} - [Success] - ${message}`, errorCallback);
-    //console.log(message);
 };
 
 exports.error = (message: any) => {

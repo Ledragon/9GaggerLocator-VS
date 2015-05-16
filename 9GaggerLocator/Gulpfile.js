@@ -31,13 +31,19 @@ gulp.task('wiredep', function() {
 
 gulp.task('ts', function() {
     return gulp
-        .src('./server/utilities/logger.ts')
+        .src('./server/utilities/*.ts')
         .pipe($.typescript({
             noImplicitAny: false,
             declarationFiles: true,
 
         }))
         .js
+        .pipe(gulp.dest('./server/utilities'));
+});
+gulp.task('tsc', function () {
+    return gulp
+        .src('./server/utilities/*.ts')
+        .pipe($.tsc())
         .pipe(gulp.dest('./server/utilities'));
 });
 

@@ -59,8 +59,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="framework\utilities\logger.ts" />
     <TypeScriptCompile Include="public\app\account\profileCOntroller.ts" />
     <TypeScriptCompile Include="public\app\account\userResource.ts" />
+    <Content Include="framework\LeDragon-Framework.css.map">
+      <DependentUpon>LeDragon-Framework.css</DependentUpon>
+    </Content>
+    <None Include="framework\LeDragon-Framework.less" />
+    <Content Include="framework\LeDragon-Framework.css">
+      <DependentUpon>LeDragon-Framework.less</DependentUpon>
+    </Content>
+    <Content Include="framework\LeDragon-Framework.min.css">
+      <DependentUpon>LeDragon-Framework.css</DependentUpon>
+    </Content>
     <Content Include="public\app\account\profile.html" />
     <Content Include="public\app\admin\users.html" />
     <Content Include="public\app\interaction\chat.html" />
@@ -244,7 +255,7 @@
     <Content Include="server\models\user.js" />
     <Content Include="server\services\geoDataService.js" />
     <Content Include="server\utilities\encryption.js" />
-    <TypeScriptCompile Include="public\framework\map\worldMap.ts" />
+    <TypeScriptCompile Include="framework\map\worldMap.ts" />
     <TypeScriptCompile Include="server\utilities\logger.ts" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />
@@ -253,6 +264,8 @@
     </Content>
     <Content Include="package.json" />
     <Content Include="server\data\countries-110m.topo.json" />
+    <Content Include="test\framework\index.html" />
+    <Content Include="test\framework\worldMap.spec.js" />
     <Content Include="test\server\geoDataService.spec.js" />
     <Content Include="tsd.json" />
     <Content Include="server\data\populated-places-10m.geo.json" />
@@ -429,8 +442,8 @@
     <Content Include="public\bower\lodash\LICENSE.txt" />
     <Content Include="public\bower\lodash\lodash.js" />
     <Content Include="public\bower\lodash\lodash.min.js" />
-    <Content Include="public\framework\chart.js" />
-    <Content Include="public\framework\services\frameworkService.js" />
+    <Content Include="framework\chart.js" />
+    <Content Include="framework\services\frameworkService.js" />
     <Content Include="public\index.html" />
     <Content Include="server\config\config.js" />
     <Content Include="server\config\express.js" />
@@ -467,6 +480,8 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

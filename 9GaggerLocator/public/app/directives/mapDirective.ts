@@ -43,7 +43,6 @@ module Directives {
 
                 var countriesGroup = svg.append('g');
                 var usersGroup = svg.append('g').classed('users-group', true);
-
                 var self = this;
 
                 var mercatorProjection = d3.geo.mercator()
