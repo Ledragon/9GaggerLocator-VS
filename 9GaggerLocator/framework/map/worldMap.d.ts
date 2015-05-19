@@ -1,3 +1,4 @@
+/// <reference path="../../public/scripts/topojson.d.ts" />
 declare module LeDragon.Framework.Map {
     interface IworldMap {
         drawCountries: (countries: TopoJSON.TopoJSONObject) => void;

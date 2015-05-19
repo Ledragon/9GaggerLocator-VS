@@ -27,7 +27,8 @@ module.exports = function () {
         js: [
             app + '**/*.module.js',
             app + '**/*.js',
-            client+'framework/**/*.js',
+            client+'scripts/**/*.js',
+            //'framework/**/*.js',
             '!' + app + '**/*.spec.js'
         ]
     };

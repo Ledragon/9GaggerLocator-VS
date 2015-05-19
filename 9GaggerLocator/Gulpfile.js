@@ -47,6 +47,16 @@ gulp.task('tsc', function () {
         .pipe(gulp.dest('./server/utilities'));
 });
 
+gulp.task('framework', function() {
+    return gulp.src(['./framework/**/*.ts', './public/**/*.d.ts', './typings/**/*.d.ts'])
+        .pipe($.tsc({
+            target: 'ES5',
+            out: 'framework.js'
+        }))
+        .pipe(gulp.dest('./framework/dist/'));
+
+});
+
 // functions
 function log(message) {
     $.util.log($.util.colors.blue(message));

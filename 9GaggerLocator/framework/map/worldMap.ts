@@ -1,4 +1,5 @@
-﻿module LeDragon.Framework.Map {
+﻿/// <reference path="../../public/scripts/topojson.d.ts" />
+module LeDragon.Framework.Map {
     export interface IworldMap {
         drawCountries: (countries: TopoJSON.TopoJSONObject) => void;
         addPosition: (longitude: number, latitude: number, color?: string) => void;
