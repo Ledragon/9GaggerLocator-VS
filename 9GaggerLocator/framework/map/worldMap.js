@@ -10,20 +10,19 @@ var LeDragon;
                     var _this = this;
                     this.logger = logger;
                     this.handle(function () {
-                        var c = d3.select("#" + container);
-                        _this._group = c
-                            .append('g')
-                            .classed('map', true);
-                        _this._countriesGroup = _this._group.append('g')
-                            .classed('countries', true);
-                        _this._positionsGroup = _this._group.append('g')
-                            .classed('positions', true);
-                        var width = parseFloat(c.style('width'));
-                        var height = parseFloat(c.style('height'));
-                        _this._projection = d3.geo.mercator()
-                            .center([0, 0])
-                            .translate([width / 2, height / 2])
-                            .scale(width / 8);
+                        var c = d3.select(container);
+                        var width = c.node().clientWidth;
+                        var height = c.node().clientHeight;
+                        _this._group = c.append('svg').attr({
+                            'width': width,
+                            'height': height
+                        }).append('g').classed('map', true);
+                        d3.select(window).on('resize', function () {
+                            console.log(c.node().clientWidth + '*' + c.node().clientHeight);
+                        });
+                        _this._countriesGroup = _this._group.append('g').classed('countries', true);
+                        _this._positionsGroup = _this._group.append('g').classed('positions', true);
+                        _this._projection = d3.geo.mercator().center([0, 0]).translate([width / 2, height / 2]).scale(width / 8);
                         _this._pathGenerator = d3.geo.path().projection(_this._projection);
                         _this._positions = [];
                     }, 'Initialization failed');
@@ -34,16 +33,7 @@ var LeDragon;
                         _this.logger.debugFormat('Drawing map.');
                         _this._countries = countries;
                         _this._geoCountries = topojson.feature(countries, countries.objects.countries);
-                        _this._countriesGroup
-                            .selectAll('path')
-                            .data(_this._geoCountries.features)
-                            .enter()
-                            .append('g')
-                            .classed('country', true)
-                            .attr('id', function (d, i) { return d.properties.adm0_a3; })
-                            .append('path')
-                            .attr('d', function (d, i) { return _this._pathGenerator(d); })
-                            .classed('normal', true);
+                        _this._countriesGroup.selectAll('path').data(_this._geoCountries.features).enter().append('g').classed('country', true).attr('id', function (d, i) { return d.properties.adm0_a3; }).append('path').attr('d', function (d, i) { return _this._pathGenerator(d); }).classed('normal', true);
                         _this.logger.debugFormat('Map drawn.');
                     }, 'Drawing of map failed.');
                 };
@@ -55,8 +45,7 @@ var LeDragon;
                         p.color = color;
                         _this._positions.push(p);
                         var projected = _this._projection([longitude, latitude]);
-                        var circle = _this._positionsGroup.append('circle')
-                            .attr({
+                        var circle = _this._positionsGroup.append('circle').attr({
                             'r': 2,
                             'cx': projected[0],
                             'cy': projected[1]
@@ -71,21 +60,13 @@ var LeDragon;
                     var _this = this;
                     this.handle(function () {
                         _this._projection.center([longitude, latitude]).scale(8000);
-                        _this._countriesGroup
-                            .selectAll('path')
-                            .data(_this._geoCountries.features)
-                            .transition()
-                            .attr('d', function (d) {
+                        _this._countriesGroup.selectAll('path').data(_this._geoCountries.features).transition().attr('d', function (d) {
                             var result = _this._pathGenerator(d);
                             return result;
                         });
-                        _this._positionsGroup
-                            .selectAll('circle')
-                            .data(_this._positions)
-                            .transition()
-                            .attr({
+                        _this._positionsGroup.selectAll('circle').data(_this._positions).transition().attr({
                             'cx': function (d, i) { return _this._projection([d.longitude, d.latitude])[0]; },
-                            'cy': function (d, i) { return _this._projection([d.longitude, d.latitude])[0]; },
+                            'cy': function (d, i) { return _this._projection([d.longitude, d.latitude])[1]; },
                             'r': '2'
                         });
                     }, 'Centering on position failed.');

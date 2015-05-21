@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="home">
+            <a class="navbar-brand" ui-sref="home" ui-sref-active="active">
                 <span class="fa fa-map-marker"></span> 9
                 <!--<img src="http://www.android-user.de/wp-content/uploads/2014/01/33174-icon-9gag-app.png" style="width: 32px;" />-->
             </a>
@@ -15,16 +15,16 @@
 
         <div class="collapse navbar-collapse navbar-left" id="example">
             <ul class="nav navbar-nav ">
-                <li ng-if="!vm.currentUser" ng-class="{'active': vm.currentState === 'login'}">
+                <li ng-if="!vm.currentUser" ui-sref-active="active">
                     <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
                 </li>
-                <li ng-if="!vm.currentUser" ng-class="{'active': vm.currentState === 'register'}">
+                <li ng-if="!vm.currentUser" ui-sref-active="active">
                     <a ui-sref="register"><span class="fa fa-user"></span> Register</a>
                 </li>
-                <li ng-if="vm.currentUser" ng-class="{'active': vm.currentState === 'overview'}">
+                <li ng-if="vm.currentUser" ui-sref-active="active">
                     <a ui-sref="overview"><span class="fa fa-users"></span> Users</a>
                 </li>
-                <li ng-if="vm.currentUser" ng-class="{'active': vm.currentState === 'chat'}">
+                <li ng-if="vm.currentUser" ui-sref-active="active">
                     <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
                 </li>
             </ul>
@@ -49,7 +49,9 @@
             </li>
         </ul>
         <div class="navbar-text navbar-right" ng-show="vm.currentUser">
-            <i class="fa fa-envelope fa-adjust"></i>
+            <a ui-sref-active ui-sref="inbox">
+                <i class="fa fa-envelope fa-adjust"></i>
+            </a>
             <span class="badge">{{vm.unread}}</span>
         </div>
     </div>

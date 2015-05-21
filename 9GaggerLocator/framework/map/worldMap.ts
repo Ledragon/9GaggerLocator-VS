@@ -16,18 +16,26 @@ module LeDragon.Framework.Map {
         private _geoCountries: any;
         private _positions: Array<position>;
 
-        constructor(container: string, private logger: Utilities.Ilogger) {
+        constructor(container: any, private logger: Utilities.Ilogger) {
             this.handle(() => {
-                var c = d3.select(`#${container}`);
+                var c = d3.select(container);
+                var width = c.node().clientWidth;
+                var height = c.node().clientHeight;
                 this._group = c
+                    .append('svg')
+                    .attr({
+                        'width': width,
+                        'height': height
+                    })
                     .append('g')
                     .classed('map', true);
+                d3.select(window).on('resize', () => {
+                    console.log(c.node().clientWidth + '*' + c.node().clientHeight);
+                });
                 this._countriesGroup = this._group.append('g')
                     .classed('countries', true);
                 this._positionsGroup = this._group.append('g')
                     .classed('positions', true);
-                var width = parseFloat(c.style('width'));
-                var height = parseFloat(c.style('height'));
                 this._projection = d3.geo.mercator()
                     .center([0, 0])
                     .translate([width / 2, height / 2])
@@ -98,7 +106,7 @@ module LeDragon.Framework.Map {
                     .transition()
                     .attr({
                         'cx': (d: any, i: any) => this._projection([d.longitude, d.latitude])[0],
-                        'cy': (d: any, i: any) => this._projection([d.longitude, d.latitude])[0],
+                        'cy': (d: any, i: any) => this._projection([d.longitude, d.latitude])[1],
                         'r': '2'
                     });
             }, 'Centering on position failed.');

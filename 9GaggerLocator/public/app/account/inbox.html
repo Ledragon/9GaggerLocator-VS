@@ -1,0 +1,18 @@
+﻿<div>
+    <div class="list-group">
+        <div class="panel panel-default" ng-repeat="message in vm.messageList">
+            <div class="panel-heading">
+
+                <h3 class="list-group-item-heading">
+                    {{message.title}}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {{message.content}}
+            </div>
+            <div class="panel-footer">
+                <span>From {{message.sender}} on {{message.date | date: 'short'}}</span>
+            </div>
+        </div>
+    </div>
+</div>

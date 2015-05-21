@@ -55,6 +55,12 @@ var app;
                 controller: 'chatController',
                 controllerAs: 'vm',
                 resolve: routeAuthenticationCheck.isAuthenticated
+            }).state('inbox', {
+                url: '/inbox',
+                templateUrl: 'app/account/inbox.html',
+                controller: 'inboxController',
+                controllerAs: 'vm',
+                resolve: routeAuthenticationCheck.isAuthenticated
             }).state('notAuthorized', {
                 url: '/notauthorized',
                 templateUrl: 'app/layout/special/notAuthorized.html'

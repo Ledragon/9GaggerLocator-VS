@@ -1,3 +1,4 @@
+/// <vs SolutionOpened='watch-framework' />
 var gulp = require('gulp');
 
 //use config file to reuse gulp file easily
@@ -47,14 +48,22 @@ gulp.task('tsc', function () {
         .pipe(gulp.dest('./server/utilities'));
 });
 
-gulp.task('framework', function() {
+gulp.task('build-framework', function() {
     return gulp.src(['./framework/**/*.ts', './public/**/*.d.ts', './typings/**/*.d.ts'])
         .pipe($.tsc({
             target: 'ES5',
             out: 'framework.js'
         }))
         .pipe(gulp.dest('./framework/dist/'));
+});
 
+gulp.task('framework', ['build-framework'], function() {
+    return gulp.src('./framework/dist/*')
+        .pipe(gulp.dest('./public/scripts'));
+});
+
+gulp.task('watch-framework', function() {
+    gulp.watch('./framework/**/*.ts', ['framework']);
 });
 
 // functions
