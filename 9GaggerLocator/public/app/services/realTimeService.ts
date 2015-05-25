@@ -1,4 +1,5 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/socket.io-client/socket.io-client.d.ts" />
 module app.Services {
     export interface IrealTimeService {
         emit(event, ...args: Array<any>);

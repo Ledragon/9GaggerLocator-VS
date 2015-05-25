@@ -1,9 +1,15 @@
 /// <reference path="../../../typings/d3/d3.d.ts" />
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../scripts/framework.d.ts" />
 var Directives;
 (function (Directives) {
     var app = angular.module('app');
-    app.directive('ldMap', ['geoService', 'userService', function (geoService, userService) { return new mapDirective(geoService, userService); }]);
+    app.directive('ldMap', [
+        'geoService', 'userService',
+        function (geoService, userService) {
+            return new mapDirective(geoService, userService);
+        }
+    ]);
     var mapDirective = (function () {
         function mapDirective(geoService, userService) {
             this.geoService = geoService;
@@ -14,7 +20,8 @@ var Directives;
             this.colorScale = d3.scale.linear().range(this.colors);
             this.scope = {
                 users: '=',
-                me: '='
+                me: '=',
+                states: '='
             };
             this.link = this._link.bind(this);
         }
@@ -22,7 +29,7 @@ var Directives;
             try {
                 scope.isLoading = true;
                 var logger = new LeDragon.Framework.Utilities.logger(console);
-                var map = new LeDragon.Framework.Map.map(element[0], logger);
+                var map = new LeDragon.Framework.Map.map(element[0], logger, d3);
                 this.geoService.getCountries().then(function (countries) {
                     map.drawCountries(countries);
                 });
@@ -33,9 +40,22 @@ var Directives;
                     }
                 });
                 scope.$watch(function () { return scope.users; }, function () {
-                    scope.users.forEach(function (u) {
-                        map.addPosition(u.longitude, u.latitude, 'yellow');
-                    });
+                    if (scope.users) {
+                        scope.users.forEach(function (u) {
+                            map.addPosition(u.longitude, u.latitude, 'yellow');
+                        });
+                    }
+                });
+                //scope.$watch(() => scope.selectedCountry, () => {
+                //    if (scope.selectedCountry && scope.selectedCountry.name) {
+                //        console.log('reading states');
+                //    }
+                //});
+                scope.$watch(function () { return scope.states; }, function () {
+                    if (scope.states) {
+                        console.log(scope.states);
+                        map.drawStates(scope.states);
+                    }
                 });
             }
             catch (e) {

@@ -1,4 +1,5 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../typings/angular-ui-router/angular-ui-router.d.ts" />
 module app {
     'use strict';
     var app = angular.module('app', ['ui.router', 'ngResource']);

@@ -1,16 +1,74 @@
-/// <reference path="../../public/scripts/topojson.d.ts" />
 var LeDragon;
 (function (LeDragon) {
     var Framework;
     (function (Framework) {
         var Map;
         (function (Map) {
+            var Models;
+            (function (Models) {
+                var position = (function () {
+                    function position(longitude, latitude) {
+                        this.longitude = longitude;
+                        this.latitude = latitude;
+                    }
+                    return position;
+                })();
+                Models.position = position;
+            })(Models = Map.Models || (Map.Models = {}));
+        })(Map = Framework.Map || (Framework.Map = {}));
+    })(Framework = LeDragon.Framework || (LeDragon.Framework = {}));
+})(LeDragon || (LeDragon = {}));
+var LeDragon;
+(function (LeDragon) {
+    var Framework;
+    (function (Framework) {
+        var Utilities;
+        (function (Utilities) {
+            var logger = (function () {
+                function logger(console) {
+                    this.console = console;
+                }
+                logger.prototype.debugFormat = function (message) {
+                    this.console.debug(message);
+                };
+                logger.prototype.infoFormat = function (message) {
+                    this.console.info(message);
+                };
+                logger.prototype.warningFormat = function (message) {
+                    this.console.warn(message);
+                };
+                logger.prototype.errorFormat = function (message) {
+                    this.console.error(message);
+                };
+                logger.prototype.fatalFormat = function (message) {
+                    this.console.error(message);
+                };
+                return logger;
+            })();
+            Utilities.logger = logger;
+        })(Utilities = Framework.Utilities || (Framework.Utilities = {}));
+    })(Framework = LeDragon.Framework || (LeDragon.Framework = {}));
+})(LeDragon || (LeDragon = {}));
+/// <reference path="../../typings/d3/d3.d.ts" />
+/// <reference path="../../typings/lodash/lodash.d.ts" />
+/// <reference path="../../typings/geojson/geojson.d.ts" />
+/// <reference path="../topojson.d.ts" />
+/// <reference path="../models/position.ts" />
+/// <reference path="../utilities/logger.ts" />
+var LeDragon;
+(function (LeDragon) {
+    var Framework;
+    (function (Framework) {
+        var Map;
+        (function (Map) {
+            var position = Map.Models.position;
             var map = (function () {
-                function map(container, logger) {
+                function map(container, logger, d3) {
                     var _this = this;
                     this.logger = logger;
+                    this.d3 = d3;
                     this.handle(function () {
-                        var c = d3.select(container);
+                        var c = _this.d3.select(container);
                         var width = c.node().clientWidth;
                         var height = c.node().clientHeight;
                         _this._group = c
@@ -21,18 +79,20 @@ var LeDragon;
                         })
                             .append('g')
                             .classed('map', true);
-                        d3.select(window).on('resize', function () {
-                            console.log(c.node().clientWidth + '*' + c.node().clientHeight);
-                        });
+                        //                d3.select(window).on('resize', () => {
+                        //                    console.log(c.node().clientWidth + '*' + c.node().clientHeight);
+                        //                });
                         _this._countriesGroup = _this._group.append('g')
                             .classed('countries', true);
+                        _this._statesGroup = _this._group.append('g')
+                            .classed('states', true);
                         _this._positionsGroup = _this._group.append('g')
                             .classed('positions', true);
-                        _this._projection = d3.geo.mercator()
+                        _this._projection = _this.d3.geo.mercator()
                             .center([0, 0])
                             .translate([width / 2, height / 2])
                             .scale(width / 8);
-                        _this._pathGenerator = d3.geo.path().projection(_this._projection);
+                        _this._pathGenerator = _this.d3.geo.path().projection(_this._projection);
                         _this._positions = [];
                     }, 'Initialization failed');
                 }
@@ -54,6 +114,18 @@ var LeDragon;
                             .classed('normal', true);
                         _this.logger.debugFormat('Map drawn.');
                     }, 'Drawing of map failed.');
+                };
+                map.prototype.drawStates = function (states, color) {
+                    var _this = this;
+                    this.logger.debugFormat(states);
+                    var d = this._statesGroup
+                        .selectAll('path')
+                        .data(states);
+                    d.enter()
+                        .append('path');
+                    d.attr('d', function (d, i) { return _this._pathGenerator(d); });
+                    d.attr('fill', color);
+                    d.exit().remove();
                 };
                 map.prototype.addPosition = function (longitude, latitude, color) {
                     var _this = this;
@@ -98,6 +170,14 @@ var LeDragon;
                         });
                     }, 'Centering on position failed.');
                 };
+                map.prototype.zoomOnCountry = function (countryName) {
+                    var country = _.find(this._geoCountries.features, function (c) { return c.properties.name.toLowerCase() === countryName.toLowerCase(); });
+                    if (!country) {
+                        this.logger.errorFormat("No country with name " + 0 + " found.");
+                    }
+                    else {
+                    }
+                };
                 map.prototype.handle = function (method, message) {
                     try {
                         method();
@@ -111,44 +191,6 @@ var LeDragon;
                 return map;
             })();
             Map.map = map;
-            var position = (function () {
-                function position(longitude, latitude) {
-                    this.longitude = longitude;
-                    this.latitude = latitude;
-                }
-                return position;
-            })();
         })(Map = Framework.Map || (Framework.Map = {}));
-    })(Framework = LeDragon.Framework || (LeDragon.Framework = {}));
-})(LeDragon || (LeDragon = {}));
-var LeDragon;
-(function (LeDragon) {
-    var Framework;
-    (function (Framework) {
-        var Utilities;
-        (function (Utilities) {
-            var logger = (function () {
-                function logger(console) {
-                    this.console = console;
-                }
-                logger.prototype.debugFormat = function (message) {
-                    this.console.debug(message);
-                };
-                logger.prototype.infoFormat = function (message) {
-                    this.console.info(message);
-                };
-                logger.prototype.warningFormat = function (message) {
-                    this.console.warn(message);
-                };
-                logger.prototype.errorFormat = function (message) {
-                    this.console.error(message);
-                };
-                logger.prototype.fatalFormat = function (message) {
-                    this.console.error(message);
-                };
-                return logger;
-            })();
-            Utilities.logger = logger;
-        })(Utilities = Framework.Utilities || (Framework.Utilities = {}));
     })(Framework = LeDragon.Framework || (LeDragon.Framework = {}));
 })(LeDragon || (LeDragon = {}));

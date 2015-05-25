@@ -1,4 +1,6 @@
-﻿module app.Controllers {
+﻿/// <reference path="../../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+module app.Controllers {
     interface InavBarScope extends ng.IScope {
         vm: navBarController;
     }

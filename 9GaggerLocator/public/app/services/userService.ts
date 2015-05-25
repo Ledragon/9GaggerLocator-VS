@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/angularjs/angular.d.ts" />
 module app.Services {
 
     export interface IuserService {
@@ -10,23 +11,23 @@ module app.Services {
 
         }
 
-        public getAll(): ng.IPromise<any> {
+        getAll(): ng.IPromise<any> {
             var defered = this.$q.defer();
             this.$http.get('/api/userNames')
-                .success((data, status) => {
+                .success((data: any, status: any) => {
                     defered.resolve(data);
                 })
-                .error((reason) => {
+                .error((reason: any) => {
                     defered.reject(reason);
                 });
             return defered.promise;
         }
 
-        public getNumberByCountry(): ng.IPromise<any> {
+        getNumberByCountry(): ng.IPromise<any> {
             var defered = this.$q.defer();
-            this.getAll().then((users) => {
-                var grouped = _.groupBy(users,(u: Models.user) => u.country);
-                var result = [];
+            this.getAll().then((users: any) => {
+                var grouped = _.groupBy(users, (u: Models.user) => u.country);
+                var result = <Array<any>>[];
                 for (var key in grouped) {
                     result.push({
                         country: key,
@@ -39,9 +40,8 @@ module app.Services {
         }
     }
 
-    var app = angular.module('app');
-    app.factory('userService', [
+    var app = angular.module('app').factory('userService', [
         '$q', '$http',
-        ($q, $http) => new userService($q, $http)
+        ($q: any, $http: any) => new userService($q, $http)
     ]);
 }

@@ -24,6 +24,10 @@ module.exports = function (app) {
         geoController.getCountries
     );
 
+    app.get('/api/states',
+        geoController.getStates
+    );
+
     app.get('/', function (request, response) {
         response.render('index.html');
     });

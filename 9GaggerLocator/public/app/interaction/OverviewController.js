@@ -36,6 +36,29 @@ var app;
                     return "flag-icon-" + isoA2.toLowerCase();
                 }
             };
+            OverviewController.prototype.selectCountry = function (countryName) {
+                var _this = this;
+                this.geoService.getStates(countryName).then(function (data) {
+                    _this.states = data;
+                });
+                //this.geoService.getCountry(countryName)
+                //    .then((country: any) => {
+                //        if (country) {
+                //            console.log('country selected');
+                //            this.selectedCountry = country;
+                //        }
+                //    },(reason) => {
+                //        console.error(reason);
+                //    });
+                //this.geoService.getStates(scope.selectedCountry.name)
+                //    .then((data) => {
+                //    console.log('promise resolved');
+                //    console.log(data);
+                //    this._states = data;
+                //}, (reason) => {
+                //        console.error(reason);
+                //    });
+            };
             OverviewController.prototype.sendTo = function (user) {
                 this._message = new message();
                 this._message.from = this.identityService.currentUser;
@@ -52,8 +75,7 @@ var app;
                         longitude: this.identityService.currentUser.longitude,
                         latitude: this.identityService.currentUser.latitude
                     }
-                };
-                //this.identityService.currentUser
+                }; //this.identityService.currentUser
                 //this.geoService.findMe().then((position) => {
                 //    this.position = position;
                 //}, (reason: any) => {
@@ -65,12 +87,9 @@ var app;
             };
             return OverviewController;
         })();
-        angular.module('app').controller('OverviewController', [
-            'userService',
-            'geoService',
-            'identityService',
-            'realTimeService',
-            'notifierService',
+        angular.module('app')
+            .controller('OverviewController', [
+            'userService', 'geoService', 'identityService', 'realTimeService', 'notifierService',
             OverviewController
         ]);
     })(Controllers = app.Controllers || (app.Controllers = {}));

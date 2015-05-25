@@ -11,17 +11,20 @@ var app;
                         title: 'Hello',
                         content: 'This is just a test message. I just want to check if it works.',
                         date: new Date()
-                    }, {
+                    },
+                    {
                         sender: 'John',
                         title: 'Hello',
                         content: 'This is just a test message. I just want to check if it works.',
                         date: new Date()
-                    }, {
+                    },
+                    {
                         sender: 'John',
                         title: 'Hello',
                         content: 'This is just a test message. I just want to check if it works.',
                         date: new Date()
-                    }, {
+                    },
+                    {
                         sender: 'John',
                         title: 'Hello',
                         content: 'This is just a test message. I just want to check if it works.',

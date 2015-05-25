@@ -15,6 +15,8 @@ module app.Controllers {
         messageTitle: string;
         messageContent: string;
         position: any;
+        //selectedCountry: any;
+        states:any;
 
         constructor(userService: Services.IuserService,
             private geoService: Services.IgeoService,
@@ -46,6 +48,29 @@ module app.Controllers {
             }
         }
 
+        selectCountry(countryName: string) {
+            this.geoService.getStates(countryName).then(data => {
+                this.states = data;
+            });
+            //this.geoService.getCountry(countryName)
+            //    .then((country: any) => {
+            //        if (country) {
+            //            console.log('country selected');
+            //            this.selectedCountry = country;
+            //        }
+            //    },(reason) => {
+            //        console.error(reason);
+            //    });
+            //this.geoService.getStates(scope.selectedCountry.name)
+            //    .then((data) => {
+            //    console.log('promise resolved');
+            //    console.log(data);
+            //    this._states = data;
+            //}, (reason) => {
+            //        console.error(reason);
+            //    });
+        }
+
         sendTo(user: any) {
             this._message = new message();
             this._message.from = this.identityService.currentUser;
@@ -61,18 +86,18 @@ module app.Controllers {
         nearMe() {
             this.position = {
                 coords: {
-                    longitude:this.identityService.currentUser.longitude,
-                    latitude:this.identityService.currentUser.latitude
+                    longitude: this.identityService.currentUser.longitude,
+                    latitude: this.identityService.currentUser.latitude
                 }
-            }
-            //this.identityService.currentUser
+            }; //this.identityService.currentUser
             //this.geoService.findMe().then((position) => {
             //    this.position = position;
             //}, (reason: any) => {
             //    this.notifierService.error(reason);
             //});
         }
-        sameCountry(user:any) {
+
+        sameCountry(user: any) {
             return user.country === this.identityService.currentUser.country;
         }
     }

@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/angularjs/angular.d.ts" />
 var app;
 (function (_app) {
     var Services;
@@ -33,8 +34,7 @@ var app;
             };
             return userService;
         })();
-        var app = angular.module('app');
-        app.factory('userService', [
+        var app = angular.module('app').factory('userService', [
             '$q',
             '$http',
             function ($q, $http) { return new userService($q, $http); }

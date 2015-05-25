@@ -30,17 +30,6 @@ gulp.task('wiredep', function() {
         .pipe(gulp.dest(config.client));
 });
 
-gulp.task('ts', function() {
-    return gulp
-        .src('./server/utilities/*.ts')
-        .pipe($.typescript({
-            noImplicitAny: false,
-            declarationFiles: true,
-
-        }))
-        .js
-        .pipe(gulp.dest('./server/utilities'));
-});
 gulp.task('tsc', function () {
     return gulp
         .src('./server/utilities/*.ts')
@@ -48,22 +37,19 @@ gulp.task('tsc', function () {
         .pipe(gulp.dest('./server/utilities'));
 });
 
-gulp.task('build-framework', function() {
-    return gulp.src(['./framework/**/*.ts', './public/**/*.d.ts', './typings/**/*.d.ts'])
+gulp.task('tsc-client', function() {
+    return gulp
+        .src([
+            './public/**/*.ts'
+            ,'!./public/**/*.d.ts'
+            , './public/scripts/**/*.d.ts'
+        ])
         .pipe($.tsc({
             target: 'ES5',
-            out: 'framework.js'
+            declaration: false,
+            sourceMap: false
         }))
-        .pipe(gulp.dest('./framework/dist/'));
-});
-
-gulp.task('framework', ['build-framework'], function() {
-    return gulp.src('./framework/dist/*')
-        .pipe(gulp.dest('./public/scripts'));
-});
-
-gulp.task('watch-framework', function() {
-    gulp.watch('./framework/**/*.ts', ['framework']);
+        .pipe(gulp.dest('.'));
 });
 
 // functions
