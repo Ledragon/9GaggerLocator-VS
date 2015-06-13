@@ -2,25 +2,27 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4 col-lg-6 col-lg-offset-3">
             <div class="well login">
-                <div class="input-group login-control">
-                    <span class="input-group-addon" id="sizing-addon1">
+                <form>
+                    <div class="input-group login-control">
+                        <span class="input-group-addon" id="sizing-addon1">
                             <i class="fa fa-user"></i>
                         </span>
-                    <input type="text" ng-model="vm.userName" class="form-control" placeholder="User name" aria-describedby="sizing-addon1"/>
-                </div>
-                <div class="input-group login-control">
-                    <span class="input-group-addon">
-                        <i class="fa fa-lock"></i>
-                    </span>
-                    <input type="password" ng-model="vm.password" class="form-control" placeholder="Password" required/>
-                </div>
+                        <input type="text" ng-model="vm.userName" class="form-control" placeholder="User name" aria-describedby="sizing-addon1" />
+                    </div>
+                    <div class="input-group login-control">
+                        <span class="input-group-addon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" ng-model="vm.password" class="form-control" placeholder="Password" required />
+                    </div>
 
-                <button class="btn btn-primary btn-md btn-block login-control" ng-click="vm.signin()">Log in</button>
+                    <button class="btn btn-primary btn-md btn-block login-control" ng-click="vm.signin()" type="submit">Log in</button>
+                </form>
                 <p class="login-control">
                     <small>Don't have an account? <a ui-sref="register">Register</a> or connect using one of the methods below.</small>
                 </p>
                 <hr/>
-                <button class="btn btn-facebook btn-md btn-block login-control" ng-click="vm.signin()"><i class="fa fa-facebook-square"></i> Log in with Facebook.</button>
+                <button class="btn btn-facebook btn-md btn-block login-control" ng-click="vm.signin()"><i class="fa fa-facebook-square"></i> Log in with Facebook</button>
 
                 <!--<form class="form-horizontal">
                     <div class="form-group">
