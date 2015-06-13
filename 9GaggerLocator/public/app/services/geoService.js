@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/geojson/geojson.d.ts" />
 /// <reference path="../../scripts/topojson.d.ts" />
 var app;
-(function (app_1) {
+(function (_app) {
     var Services;
     (function (Services) {
         var geoService = (function () {
@@ -11,12 +11,10 @@ var app;
             }
             geoService.prototype.getCountries = function () {
                 var defered = this.$q.defer();
-                this.$http.get('api/countries')
-                    .success(function (data) {
+                this.$http.get('api/countries').success(function (data) {
                     //topojson format
                     defered.resolve(data);
-                })
-                    .error((function (reason) {
+                }).error((function (reason) {
                     defered.reject(reason);
                 }));
                 return defered.promise;
@@ -73,11 +71,10 @@ var app;
         })();
         var app = angular.module('app');
         app.factory(geoService.serviceId, [
-            '$http', '$q',
-            function ($http, $q) {
-                return new geoService($http, $q);
-            }
+            '$http',
+            '$q',
+            function ($http, $q) { return new geoService($http, $q); }
         ]);
-    })(Services = app_1.Services || (app_1.Services = {}));
+    })(Services = _app.Services || (_app.Services = {}));
 })(app || (app = {}));
 //# sourceMappingURL=geoService.js.map

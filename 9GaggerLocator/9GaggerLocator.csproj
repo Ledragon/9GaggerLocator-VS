@@ -238,6 +238,7 @@
     <Content Include="public\content\app.min.css">
       <DependentUpon>app.css</DependentUpon>
     </Content>
+    <None Include="public\content\colors.less" />
     <Content Include="server.js" />
     <Content Include="server\config\auth.js" />
     <Content Include="server\config\passport.js" />
@@ -246,6 +247,7 @@
     <Content Include="server\models\user.js" />
     <Content Include="server\services\geoDataService.js" />
     <Content Include="server\utilities\encryption.js" />
+    <TypeScriptCompile Include="public\app\layout\navbar\ldNavBarDirective.ts" />
     <TypeScriptCompile Include="server\utilities\logger.ts" />
     <Content Include="server\views\index.jade" />
     <Content Include="bower.json" />

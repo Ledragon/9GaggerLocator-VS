@@ -8,4 +8,14 @@
 .same-country {
   color: #2AD0B8;
 }
+.login-control {
+  margin: 5px 0;
+}
+.well.login {
+  background-color: white;
+}
+.btn-facebook {
+  background-color: #3a5795;
+  color: white;
+}
 /*# sourceMappingURL=app.css.map */

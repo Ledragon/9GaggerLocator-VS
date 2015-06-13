@@ -13,8 +13,7 @@ var app;
             return ldNavBarDirective;
         })();
         Directives.ldNavBarDirective = ldNavBarDirective;
-        angular.module('app')
-            .directive(ldNavBarDirective.directiveId, function () { return new ldNavBarDirective(); });
+        angular.module('app').directive(ldNavBarDirective.directiveId, function () { return new ldNavBarDirective(); });
     })(Directives = app.Directives || (app.Directives = {}));
 })(app || (app = {}));
 //# sourceMappingURL=ldNavBarDirective.js.map

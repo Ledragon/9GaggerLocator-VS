@@ -5,10 +5,9 @@ var Directives;
 (function (Directives) {
     var app = angular.module('app');
     app.directive('ldMap', [
-        'geoService', 'userService',
-        function (geoService, userService) {
-            return new mapDirective(geoService, userService);
-        }
+        'geoService',
+        'userService',
+        function (geoService, userService) { return new mapDirective(geoService, userService); }
     ]);
     var mapDirective = (function () {
         function mapDirective(geoService, userService) {
@@ -54,7 +53,7 @@ var Directives;
                 scope.$watch(function () { return scope.states; }, function () {
                     if (scope.states) {
                         console.log(scope.states);
-                        map.drawStates(scope.states);
+                        map.drawStates(scope.states, 'pink');
                     }
                 });
             }

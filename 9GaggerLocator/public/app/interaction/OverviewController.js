@@ -87,9 +87,12 @@ var app;
             };
             return OverviewController;
         })();
-        angular.module('app')
-            .controller('OverviewController', [
-            'userService', 'geoService', 'identityService', 'realTimeService', 'notifierService',
+        angular.module('app').controller('OverviewController', [
+            'userService',
+            'geoService',
+            'identityService',
+            'realTimeService',
+            'notifierService',
             OverviewController
         ]);
     })(Controllers = app.Controllers || (app.Controllers = {}));

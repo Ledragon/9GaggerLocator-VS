@@ -9,6 +9,8 @@ var $ = require('gulp-load-plugins')({
     lazy: true
 });
 
+var browserSync = require('browser-sync');
+
 gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
@@ -50,6 +52,17 @@ gulp.task('tsc-client', function() {
             sourceMap: false
         }))
         .pipe(gulp.dest('.'));
+});
+
+gulp.task('browserSync', function() {
+    browserSync.init({
+        proxy: {
+            target: 'http://localhost:3030'
+        },
+        index: '/app/index.html',
+        port: 4000,
+        files: ['./public/**/*.*']
+    });
 });
 
 // functions
