@@ -12,7 +12,9 @@
 </head>
 
 <body ng-app="app">
-    <ng-include src="'app/layout/navbar/navbar.html'"></ng-include>
+<!--<ng-include src="'app/layout/navbar/navbar.html'"></ng-include>-->
+
+    <ld-nav-bar-directive></ld-nav-bar-directive>
     <div class="container">
         <ui-view></ui-view>
     </div>
@@ -51,6 +53,7 @@
     <script src="app/services/notifier.js"></script>
     <script src="app/services/realTimeService.js"></script>
     <script src="app/services/userService.js"></script>
+    <script src="app/layout/navbar/ldNavBarDirective.js"></script>
     <script src="app/layout/navbar/navBarController.js"></script>
     <script src="scripts/framework.js"></script>
     <!-- endinject -->

@@ -1,7 +1,3 @@
-/// <reference path="../typings/d3/d3.d.ts" />
-/// <reference path="../typings/lodash/lodash.d.ts" />
-/// <reference path="../typings/geojson/geojson.d.ts" />
-/// <reference path="../src/topojson.d.ts" />
 declare module LeDragon.Framework.Map.Models {
     class position {
         constructor(longitude: number, latitude: number);
