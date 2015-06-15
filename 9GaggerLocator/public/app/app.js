@@ -1,15 +1,11 @@
 /// <reference path="../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../typings/angular-ui-router/angular-ui-router.d.ts" />
 var app;
-(function (_app) {
+(function (app_1) {
     'use strict';
-    var app = angular.module('app', ['ui.router', 'ngResource']);
+    var app = angular.module('app', ['ui.router', 'ngResource', 'ngAnimate']);
     app.run([
-        '$http',
-        '$rootScope',
-        '$state',
-        'identityService',
-        'userResource',
+        '$http', '$rootScope', '$state', 'identityService', 'userResource',
         function ($http, $rootScope, $state, identityService, userResource) {
             var to;
             $http.get('/user').then(function (data) {

@@ -1,4 +1,5 @@
-﻿@import "colors";
+﻿@import "./colors.less";
+@import "../bower/bootstrap/less/variables";
 @facebook-blue:#3a5795;
 
 
@@ -24,4 +25,56 @@
 .btn-facebook{
     background-color:@facebook-blue;
     color:white;
+}
+.navbar-right>li{
+    float:left;
+}
+
+.left-menu{
+    @media (min-width: @screen-sm-min){
+    position:fixed;
+    left:0;
+    top:52px;//Find where this value comes from
+    bottom:0;
+    width:10%;
+    li{
+        float:none;
+    }
+    background-color:#222;
+    }
+    border-radius:@border-radius-base;
+}
+
+.main-content{
+    @media (min-width: @screen-sm-min){
+        padding-left:10%;
+    }
+}
+
+.ui-view-container{
+    opacity:1;
+}
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+    position:absolute;
+  -webkit-transition:all .5s ease-in-out;
+	-moz-transition:all .5s ease-in-out;
+	-o-transition:all .5s ease-in-out;
+	transition:all .5s ease-in-out;
+}
+
+[ui-view].ng-enter {
+  opacity: 0;
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1;
+}
+
+[ui-view].ng-leave {
+  opacity: 1;
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0;
 }

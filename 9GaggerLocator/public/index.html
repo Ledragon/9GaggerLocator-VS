@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower/toastr/toastr.css" />
-    <link rel="stylesheet" href="bower/flag-icon-css/css/flag-icon.min.css" />
-    <!-- endbower -->
-    <link href="content/app.css" rel="stylesheet" />
-</head>
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower/toastr/toastr.css" />
+        <link rel="stylesheet" href="bower/flag-icon-css/css/flag-icon.min.css" />
+        <!-- endbower -->
+        <link href="content/app.css" rel="stylesheet" />
+    </head>
 
-<body ng-app="app">
-<!--<ng-include src="'app/layout/navbar/navbar.html'"></ng-include>-->
+    <body ng-app="app">
+    <!--<ng-include src="'app/layout/navbar/navbar.html'"></ng-include>-->
 
     <ld-nav-bar-directive></ld-nav-bar-directive>
-    <div class="container">
-        <ui-view></ui-view>
+    <div class="container-fluid">
+        <div class="main-content ui-view-container">
+            <div ui-view></div>
+        </div>
     </div>
 
     <!-- bower:js -->

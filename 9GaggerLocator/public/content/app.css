@@ -18,4 +18,51 @@
   background-color: #3a5795;
   color: white;
 }
+.navbar-right > li {
+  float: left;
+}
+.left-menu {
+  border-radius: 4px;
+}
+@media (min-width: 768px) {
+  .left-menu {
+    position: fixed;
+    left: 0;
+    top: 52px;
+    bottom: 0;
+    width: 10%;
+    background-color: #222;
+  }
+  .left-menu li {
+    float: none;
+  }
+}
+@media (min-width: 768px) {
+  .main-content {
+    padding-left: 10%;
+  }
+}
+.ui-view-container {
+  opacity: 1;
+}
+[ui-view].ng-enter,
+[ui-view].ng-leave {
+  position: absolute;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+[ui-view].ng-enter {
+  opacity: 0;
+}
+[ui-view].ng-enter-active {
+  opacity: 1;
+}
+[ui-view].ng-leave {
+  opacity: 1;
+}
+[ui-view].ng-leave-active {
+  opacity: 0;
+}
 /*# sourceMappingURL=app.css.map */
