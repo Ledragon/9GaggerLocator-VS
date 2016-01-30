@@ -1,3 +1,4 @@
+
 module app.Controllers {
 
     interface IinboxControllerScope extends ng.IScope {
