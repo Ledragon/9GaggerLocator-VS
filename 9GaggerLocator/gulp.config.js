@@ -30,6 +30,10 @@ module.exports = function () {
             client+'scripts/**/*.js',
             //'framework/**/*.js',
             '!' + app + '**/*.spec.js'
+        ],
+        less: [
+            ,
+            'public/bower/bootstrap/less/bootstrap.less'
         ]
     };
 

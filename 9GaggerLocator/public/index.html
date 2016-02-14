@@ -3,12 +3,12 @@
     <head>
 
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="bower/toastr/toastr.css" />
         <link rel="stylesheet" href="bower/flag-icon-css/css/flag-icon.min.css" />
         <!-- endbower -->
-        <link href="content/app.css" rel="stylesheet" />
+        <!-- inject:css -->
+        <link rel="stylesheet" href="content/app.css">
+        <!-- endinject -->
     </head>
 
     <body ng-app="app">
@@ -32,10 +32,10 @@
     <script src="bower/angular-resource/angular-resource.js"></script>
     <script src="bower/toastr/toastr.js"></script>
     <script src="bower/topojson/topojson.js"></script>
-    <script src="bower/socket.io-client/socket.io.js"></script>
     <!-- endbower -->
+        <script src="bower/socket.io-client/socket.io.js"></script>
     <script src="scripts/framework.js"></script>
-<!-- inject:js -->
+    <!-- inject:js -->
     <script src="app/app.js"></script>
     <script src="app/config.route.js"></script>
     <script src="app/account/inboxController.js"></script>

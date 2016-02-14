@@ -27,4 +27,3 @@ var checkLogFile = function () {
 var errorCallback = function (error) {
     console.error(error);
 };
-//# sourceMappingURL=logger.js.map

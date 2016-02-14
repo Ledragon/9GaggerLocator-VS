@@ -6,7 +6,7 @@ module app {
 
     app.run([
         '$http', '$rootScope', '$state', 'identityService', 'userResource',
-        ($http, $rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, identityService: Services.IidentityService, userResource) => {
+        ($http, $rootScope: angular.IRootScopeService, $state: angular.ui.IStateService, identityService: Services.IidentityService, userResource) => {
             var to;
             $http.get('/user').then(data => {
                 if (data.data) {
@@ -21,7 +21,7 @@ module app {
                 }
             });
 
-            $rootScope.$on('$stateChangeError', (event, toState: ng.ui.IState, toParams, fromState: ng.ui.IState, fromParams, error) => {
+            $rootScope.$on('$stateChangeError', (event, toState: angular.ui.IState, toParams, fromState: angular.ui.IState, fromParams, error) => {
                 if (error === 'Not authorized') {
                     $state.go('notAuthorized');
                 } else if (error === 'Not authenticated') {

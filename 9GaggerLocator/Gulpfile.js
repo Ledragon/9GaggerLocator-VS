@@ -29,13 +29,17 @@ gulp.task('wiredep', function() {
         .src(config.index)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js), config.injectOptions))
+        .pipe($.inject(gulp.src('public/content/*.css'), config.injectOptions))
         .pipe(gulp.dest(config.client));
 });
 
 gulp.task('tsc', function () {
     return gulp
         .src('./server/utilities/*.ts')
-        .pipe($.tsc())
+        .pipe($.typescript({
+            target: 'ES5',
+            modules:'commonjs'
+        }))
         .pipe(gulp.dest('./server/utilities'));
 });
 
@@ -54,12 +58,20 @@ gulp.task('tsc-client', function() {
         .pipe(gulp.dest('.'));
 });
 
+gulp.task('less', function() {
+    return gulp.src('public/content/app.less')
+        .pipe($.less({
+            paths:['public/content/bower/**/*']
+        }))
+        .pipe(gulp.dest('public/content'));
+});
+
 gulp.task('browserSync', function() {
     browserSync.init({
         proxy: {
             target: 'http://localhost:3030'
         },
-        index: '/app/index.html',
+        index: 'index.html',
         port: 4000,
         files: ['./public/**/*.*']
     });

@@ -13,7 +13,7 @@ module app.Controllers {
         public password: string;
 
         constructor(
-            private $state: ng.ui.IStateService,
+            private $state: angular.ui.IStateService,
             private authenticationService: Services.IauthenticationService,
             private notifierService: Services.InotificationService) {
             this.userName = '';

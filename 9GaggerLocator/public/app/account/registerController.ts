@@ -30,7 +30,7 @@ module app.Controllers {
         countries=<Array<any>>[];
 
         constructor(private $scope: ng.IScope,
-            private $state: ng.ui.IStateService,
+            private $state: angular.ui.IStateService,
             private authenticationService: Services.IauthenticationService,
             geoService: Services.IgeoService,
             private notifierService: Services.InotificationService) {

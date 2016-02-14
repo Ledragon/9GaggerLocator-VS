@@ -17,7 +17,7 @@ module app.Controllers {
         public unread: number;
 
         constructor($scope: InavBarScope,
-            private $state: ng.ui.IStateService,
+            private $state: angular.ui.IStateService,
             identityService: Services.IidentityService,
             private authenticationService: Services.IauthenticationService,
             private notifierService: Services.InotificationService,

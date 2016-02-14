@@ -6,25 +6,31 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "jquery/jquery.d.ts": {
-      "commit": "fa20411dd52348e933c2b23b24365236e92fa4ac"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "toastr/toastr.d.ts": {
-      "commit": "a0ee360d4751aa3fc928159d618442e208fd8b23"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "angular-ui-router/angular-ui-router.d.ts": {
-      "commit": "65ea56c919fd95dcd0ca3c59c9aa5eaa99c86885"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "lodash/lodash.d.ts": {
-      "commit": "b37afda34daa6186c3f143609555fcd6d70b249f"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "geojson/geojson.d.ts": {
-      "commit": "00e7f3fede5f2df55b56c72f40a144824f0f0bfa"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "socket.io-client/socket.io-client.d.ts": {
-      "commit": "f3244190e20af6901e865f4cc58127d19216baa1"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     },
     "node/node.d.ts": {
-      "commit": "fb3743886bab96ecfefabafb1044ea862de92390"
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "angularjs/angular.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
+    },
+    "d3/d3.d.ts": {
+      "commit": "5d0f2126c8dac8fce0ff020218aea06607213b0d"
     }
   }
 }
