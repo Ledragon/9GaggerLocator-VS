@@ -29,7 +29,7 @@ gulp.task('wiredep', function() {
         .src(config.index)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js), config.injectOptions))
-        .pipe($.inject(gulp.src('public/content/*.css'), config.injectOptions))
+        .pipe($.inject(gulp.src(config.css), config.injectOptions))
         .pipe(gulp.dest(config.client));
 });
 

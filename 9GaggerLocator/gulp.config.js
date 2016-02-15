@@ -31,8 +31,12 @@ module.exports = function () {
             //'framework/**/*.js',
             '!' + app + '**/*.spec.js'
         ],
+        css: [
+            'public/bower/bootstrap/dist/css/bootstrap.css',
+            'public/bower/font-awesome/css/font-awesome.css',
+            'public/content/app.css'
+        ],
         less: [
-            ,
             'public/bower/bootstrap/less/bootstrap.less'
         ]
     };
