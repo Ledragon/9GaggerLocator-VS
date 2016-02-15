@@ -1,19 +1,19 @@
 <nav class="navbar navbar-inverse" ng-controller="navBarController as vm">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#example">
+            <!--<button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#example">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>
+            </button>-->
             <a class="navbar-brand" ui-sref="home" ui-sref-active="active">
                 <span class="fa fa-map-marker"></span> 9
                 <!--<img src="http://www.android-user.de/wp-content/uploads/2014/01/33174-icon-9gag-app.png" style="width: 32px;"/>-->
             </a>
         </div>
 
-        <div class="collapse navbar-collapse navbar-left left-menu" id="example">
+        <!--<div class="collapse navbar-collapse navbar-left left-menu" id="example">
             <ul class="nav navbar-nav ">
                 <li ng-if="!vm.currentUser" ui-sref-active="active">
                     <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
@@ -28,7 +28,8 @@
                     <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
                 </li>
             </ul>
-        </div>
+        </div>-->
+
         <ul class="nav navbar-nav navbar-right" ng-show="vm.currentUser">
             <li>
                 <a ui-sref-active ui-sref="inbox">
@@ -54,5 +55,6 @@
                 </ul>
             </li>
         </ul>
+
     </div>
 </nav>

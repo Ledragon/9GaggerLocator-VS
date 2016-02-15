@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- bower:css -->
         <link rel="stylesheet" href="bower/toastr/toastr.css" />
         <link rel="stylesheet" href="bower/flag-icon-css/css/flag-icon.min.css" />
@@ -18,6 +18,22 @@
 
     <ld-nav-bar-directive></ld-nav-bar-directive>
     <div class="container-fluid">
+        <div class="left-menu">
+            <ul class="nav navbar-nav ">
+                <li ng-if="!vm.currentUser" ui-sref-active="active">
+                    <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
+                </li>
+                <li ng-if="!vm.currentUser" ui-sref-active="active">
+                    <a ui-sref="register"><span class="fa fa-user"></span> Register</a>
+                </li>
+                <li ng-if="vm.currentUser" ui-sref-active="active">
+                    <a ui-sref="overview"><span class="fa fa-users"></span> Users</a>
+                </li>
+                <li ng-if="vm.currentUser" ui-sref-active="active">
+                    <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
+                </li>
+            </ul>
+        </div>
         <div class="main-content ui-view-container">
             <div ui-view></div>
         </div>

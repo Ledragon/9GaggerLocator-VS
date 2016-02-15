@@ -36,16 +36,24 @@
 }
 
 .left-menu{
-    @media (min-width: @screen-sm-min){
     position:fixed;
-    left:0;
-    top:52px;//Find where this value comes from
     bottom:0;
-    width:@sidebar-width;
-    li{
-        float:none;
+    left:0;
+    right:0;
+    z-index:1030;
+    background:@navbar-inverse-bg;
+    @media (min-width: @screen-sm-min){
+        left:0;
+        top:52px;//Find where this value comes from
+        bottom:0;
+        width:@sidebar-width;
+        li{
+            float:none;
+        }
+        background-color:#222;
     }
-    background-color:#222;
+    li{
+        float:left;
     }
     /*border-radius:@border-radius-base;*/
 }
@@ -59,7 +67,9 @@
 .main-content{
     @media (min-width: @screen-sm-min){
         padding-left:@sidebar-width;
+        padding-bottom:0;
     }
+    padding-bottom:52px;
 }
 
 .ui-view-container{

@@ -25,11 +25,16 @@
   float: left;
 }
 .left-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background: #222;
   /*border-radius:@border-radius-base;*/
 }
 @media (min-width: 768px) {
   .left-menu {
-    position: fixed;
     left: 0;
     top: 52px;
     bottom: 0;
@@ -40,14 +45,21 @@
     float: none;
   }
 }
+.left-menu li {
+  float: left;
+}
 @media (min-width: 768px) {
   .navbar {
     border-radius: 0;
   }
 }
+.main-content {
+  padding-bottom: 52px;
+}
 @media (min-width: 768px) {
   .main-content {
     padding-left: 10%;
+    padding-bottom: 0;
   }
 }
 .ui-view-container {
