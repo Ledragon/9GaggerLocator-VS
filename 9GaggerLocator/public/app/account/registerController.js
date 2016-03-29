@@ -1,6 +1,4 @@
-/// <reference path="../../../typings/lodash/lodash.d.ts" />
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 var app;
 (function (app_1) {
     var Controllers;
@@ -15,7 +13,7 @@ var app;
                 var self = this;
                 geoService.getCountries().then(function (data) {
                     var geoJson = geoService.getGeoJSON(data);
-                    self.countries = _(geoJson.features).pluck('properties').value();
+                    self.countries = geoJson.features.map(function (d) { return d.properties; });
                 }, function (reason) {
                     notifierService.error(reason);
                 });
@@ -56,12 +54,12 @@ var app;
             };
             registerController.controllerId = 'RegisterController';
             return registerController;
-        })();
+        }());
         var userViewModel = (function () {
             function userViewModel() {
             }
             return userViewModel;
-        })();
+        }());
         var app = angular.module('app');
         app.controller(registerController.controllerId, [
             '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',

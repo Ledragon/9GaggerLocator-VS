@@ -10,7 +10,7 @@ var app;
             }
             UsersController.controllerId = 'UsersController';
             return UsersController;
-        })();
+        }());
         var app = angular.module('app');
         app.controller(UsersController.controllerId, [
             '$scope', 'userService',

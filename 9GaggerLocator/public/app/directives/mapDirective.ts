@@ -1,5 +1,4 @@
-/// <reference path="../../../typings/d3/d3.d.ts" />
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 /// <reference path="../../scripts/framework.d.ts" />
 module Directives {
 
@@ -22,7 +21,7 @@ module Directives {
         replace = true;
         link: (scope: any, element: any, attributes: any) => {};
 
-        private colors = ['rgb(254,229,217)', 'rgb(165,15,21)'];
+        private colors:any = ['rgb(254,229,217)', 'rgb(165,15,21)'];
         private colorScale = d3.scale.linear().range(this.colors);
         scope: any;
         private _states;

@@ -16,28 +16,13 @@
 </head>
 
 <body ng-app="app">
-    <!--<ng-include src="'app/layout/navbar/navbar.html'"></ng-include>-->
-
     <ld-nav-bar-directive></ld-nav-bar-directive>
     <div class="container-fluid">
-        <div class="left-menu">
-            <ul class="nav navbar-nav ">
-                <li ng-if="!vm.currentUser" ui-sref-active="active">
-                    <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
-                </li>
-                <li ng-if="!vm.currentUser" ui-sref-active="active">
-                    <a ui-sref="register"><span class="fa fa-user"></span> Register</a>
-                </li>
-                <li ng-if="vm.currentUser" ui-sref-active="active">
-                    <a ui-sref="overview"><span class="fa fa-users"></span> Users</a>
-                </li>
-                <li ng-if="vm.currentUser" ui-sref-active="active">
-                    <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
-                </li>
-            </ul>
-        </div>
+        <ld-left-menu></ld-left-menu>
+
         <div class="main-content ui-view-container">
             <div ui-view></div>
+
         </div>
     </div>
 
@@ -66,10 +51,9 @@
     <script src="app/account/registerController.js"></script>
     <script src="app/account/userresource.js"></script>
     <script src="app/admin/UsersController.js"></script>
-    <script src="app/directives/mapDirective.js"></script>
     <script src="app/interaction/OverviewController.js"></script>
     <script src="app/interaction/chatController.js"></script>
-    <script src="app/models/user.js"></script>
+    <script src="app/directives/mapDirective.js"></script>
     <script src="app/services/autenticationService.js"></script>
     <script src="app/services/d3Service.js"></script>
     <script src="app/services/geoService.js"></script>
@@ -77,6 +61,8 @@
     <script src="app/services/notifier.js"></script>
     <script src="app/services/realTimeService.js"></script>
     <script src="app/services/userService.js"></script>
+    <script src="app/models/user.js"></script>
+    <script src="app/layout/leftMenu/ldLeftMenu.js"></script>
     <script src="app/layout/navbar/ldNavBarDirective.js"></script>
     <script src="app/layout/navbar/navBarController.js"></script>
     <script src="scripts/framework.js"></script>

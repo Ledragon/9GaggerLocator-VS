@@ -55,7 +55,7 @@ gulp.task('tsc-client', function() {
             declaration: false,
             sourceMap: false
         }))
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('./public'));
 });
 
 gulp.task('less', function() {

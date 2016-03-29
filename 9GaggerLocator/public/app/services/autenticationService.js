@@ -71,7 +71,7 @@ var app;
             };
             authenticationService.serviceId = 'authenticationService';
             return authenticationService;
-        })();
+        }());
         var app = angular.module('app');
         app.factory(authenticationService.serviceId, [
             '$http', '$q', 'identityService', 'userResource',

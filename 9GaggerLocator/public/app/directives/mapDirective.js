@@ -1,5 +1,4 @@
-/// <reference path="../../../typings/d3/d3.d.ts" />
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 /// <reference path="../../scripts/framework.d.ts" />
 var Directives;
 (function (Directives) {
@@ -64,6 +63,6 @@ var Directives;
             scope.isLoading = false;
         };
         return mapDirective;
-    })();
+    }());
     ;
 })(Directives || (Directives = {}));

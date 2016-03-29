@@ -21,7 +21,7 @@ var app;
             };
             realTimeService.serviceId = 'realTimeService';
             return realTimeService;
-        })();
+        }());
         angular.module('app').factory(realTimeService.serviceId, [
             'identityService',
             function (identityService) { return new realTimeService(identityService); }

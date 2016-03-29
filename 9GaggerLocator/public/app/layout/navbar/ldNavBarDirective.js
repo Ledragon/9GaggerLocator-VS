@@ -11,7 +11,7 @@ var app;
             }
             ldNavBarDirective.directiveId = 'ldNavBarDirective';
             return ldNavBarDirective;
-        })();
+        }());
         Directives.ldNavBarDirective = ldNavBarDirective;
         angular.module('app')
             .directive(ldNavBarDirective.directiveId, function () { return new ldNavBarDirective(); });

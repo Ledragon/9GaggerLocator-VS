@@ -31,12 +31,12 @@ var app;
             }
             inboxController.controllerId = 'inboxController';
             return inboxController;
-        })();
+        }());
         var message = (function () {
             function message() {
             }
             return message;
-        })();
+        }());
         angular.module('app').controller(inboxController.controllerId, [
             '$scope',
             inboxController

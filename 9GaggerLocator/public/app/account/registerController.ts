@@ -1,6 +1,4 @@
-/// <reference path="../../../typings/lodash/lodash.d.ts" />
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 module app.Controllers {
     interface IregisterController {
         userName: string;
@@ -37,7 +35,7 @@ module app.Controllers {
             var self = this;
             geoService.getCountries().then((data) => {
                 var geoJson = geoService.getGeoJSON(data);
-                self.countries = _(geoJson.features).pluck('properties').value();
+                self.countries = geoJson.features.map(d=>d.properties);
             }, (reason: any) => {
                 notifierService.error(reason);
             });

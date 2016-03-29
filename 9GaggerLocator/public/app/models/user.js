@@ -6,7 +6,7 @@ var app;
             function user() {
             }
             return user;
-        })();
+        }());
         Models.user = user;
     })(Models = app.Models || (app.Models = {}));
 })(app || (app = {}));

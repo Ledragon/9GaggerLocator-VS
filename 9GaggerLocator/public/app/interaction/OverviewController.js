@@ -7,7 +7,7 @@ var app;
             function message() {
             }
             return message;
-        })();
+        }());
         var OverviewController = (function () {
             function OverviewController(userService, geoService, identityService, realTimeService, notifierService) {
                 this.geoService = geoService;
@@ -86,7 +86,7 @@ var app;
                 return user.country === this.identityService.currentUser.country;
             };
             return OverviewController;
-        })();
+        }());
         angular.module('app')
             .controller('OverviewController', [
             'userService', 'geoService', 'identityService', 'realTimeService', 'notifierService',

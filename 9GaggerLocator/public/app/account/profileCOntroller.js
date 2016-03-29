@@ -14,7 +14,7 @@ var app;
             }
             profileController.controllerId = 'profileController';
             return profileController;
-        })();
+        }());
         angular.module('app').controller(profileController.controllerId, ['$scope', 'identityService', profileController]);
     })(Controllers = app.Controllers || (app.Controllers = {}));
 })(app || (app = {}));

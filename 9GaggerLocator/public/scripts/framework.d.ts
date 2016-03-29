@@ -43,7 +43,7 @@ declare module LeDragon.Framework.Map {
         private _countries;
         private _geoCountries;
         private _positions;
-        constructor(container: any, logger: Utilities.Ilogger, d3: D3.Base);
+        constructor(container: any, logger: Utilities.Ilogger, d3: any);
         drawCountries(countries: TopoJSON.TopoJSONObject): void;
         drawStates(states: any, color?: string): void;
         addPosition(longitude: number, latitude: number, color?: string): void;

@@ -42,7 +42,7 @@ var app;
             };
             notificationService.serviceId = 'notifierService';
             return notificationService;
-        })();
+        }());
         angular.module('app').value('toastr', toastr);
         angular.module('app').factory(notificationService.serviceId, ['toastr', function (toastr) { return new notificationService(toastr); }]);
     })(Services = app.Services || (app.Services = {}));
