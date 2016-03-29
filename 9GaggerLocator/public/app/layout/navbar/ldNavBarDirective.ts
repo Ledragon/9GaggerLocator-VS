@@ -1,5 +1,5 @@
 ﻿module app.Directives {
-    export class ldNavBarDirective implements ng.IDirective {
+    export class ldNavBarDirective implements angular.IDirective {
         static directiveId ='ldNavBarDirective';
 
         restrict = 'E';

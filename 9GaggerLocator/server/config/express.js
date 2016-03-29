@@ -7,9 +7,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
 
-module.exports = function (app, config) {
-
-    app.set('views', config.rootPath + '/public/');
+module.exports = function(app, config) {
+    app.set('views', path.join(config.rootPath, '/public/'));
     app.engine('html', ejs.renderFile);
     app.set('view engine', 'html');
 
@@ -29,5 +28,5 @@ module.exports = function (app, config) {
 
     app.use(express.static(path.join(__dirname, 'data')));
     app.use(express.static(config.rootPath + '/public/'));
-    
+
 };

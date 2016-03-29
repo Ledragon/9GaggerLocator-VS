@@ -6,7 +6,8 @@ module app {
 
     app.run([
         '$http', '$rootScope', '$state', 'identityService', 'userResource',
-        ($http, $rootScope: angular.IRootScopeService, $state: angular.ui.IStateService, identityService: Services.IidentityService, userResource) => {
+        ($http: angular.IHttpService, $rootScope: angular.IRootScopeService, 
+        $state: angular.ui.IStateService, identityService: Services.IidentityService, userResource) => {
             var to;
             $http.get('/user').then(data => {
                 if (data.data) {
