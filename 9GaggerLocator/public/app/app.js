@@ -3,7 +3,7 @@
 var app;
 (function (app_1) {
     'use strict';
-    var app = angular.module('app', ['ui.router', 'ngResource', 'ngAnimate']);
+    var app = angular.module('app', ['ui.router', 'ngResource', 'ngAnimate', 'ngMaterial']);
     app.run([
         '$http', '$rootScope', '$state', 'identityService', 'userResource',
         function ($http, $rootScope, $state, identityService, userResource) {

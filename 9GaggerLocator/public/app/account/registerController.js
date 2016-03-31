@@ -54,12 +54,12 @@ var app;
             };
             registerController.controllerId = 'RegisterController';
             return registerController;
-        }());
+        })();
         var userViewModel = (function () {
             function userViewModel() {
             }
             return userViewModel;
-        }());
+        })();
         var app = angular.module('app');
         app.controller(registerController.controllerId, [
             '$scope', '$state', 'authenticationService', 'geoService', 'notifierService',

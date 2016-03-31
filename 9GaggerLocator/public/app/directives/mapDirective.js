@@ -63,6 +63,6 @@ var Directives;
             scope.isLoading = false;
         };
         return mapDirective;
-    }());
+    })();
     ;
 })(Directives || (Directives = {}));

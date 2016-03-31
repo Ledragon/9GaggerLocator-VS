@@ -2,7 +2,7 @@
 /// <reference path="../../typings/angular-ui-router/angular-ui-router.d.ts" />
 module app {
     'use strict';
-    var app = angular.module('app', ['ui.router', 'ngResource', 'ngAnimate']);
+    var app = angular.module('app', ['ui.router', 'ngResource', 'ngAnimate', 'ngMaterial']);
 
     app.run([
         '$http', '$rootScope', '$state', 'identityService', 'userResource',

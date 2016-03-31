@@ -35,7 +35,7 @@ var app;
                 return defered.promise;
             };
             return userService;
-        }());
+        })();
         var app = angular.module('app').factory('userService', [
             '$q', '$http',
             function ($q, $http) { return new userService($q, $http); }
