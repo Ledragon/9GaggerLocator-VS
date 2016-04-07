@@ -265,6 +265,7 @@
     <Content Include="test\server\geoDataService.spec.js" />
     <Content Include="tsd.json" />
     <Content Include="server\data\populated-places-10m.geo.json" />
+    <Content Include="public\tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
