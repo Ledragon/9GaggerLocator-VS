@@ -1,8 +1,19 @@
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
     <div class="mdl-layout__drawer">
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" ui-sref="login">Log in</a>
-            <a class="mdl-navigation__link" ui-sref="login">Register</a>
+            <a ng-if="!vm.currentUser" class="mdl-navigation__link" ui-sref="login">
+                <i class="fa fa-user-secret"></i>Log in
+            </a>
+            <a ng-if="!vm.currentUser" class="mdl-navigation__link" ui-sref="register">
+                <i class="fa fa-user"></i> Register
+            </a>
+            <a ng-if="vm.currentUser" class="mdl-navigation__link" ui-sref="overview">
+                <i class="fa fa-users"></i> Users
+            </a>
+            <a ng-if="vm.currentUser" class="mdl-navigation__link" ui-sref="chat">
+                <i class="fa fa-smile-o"></i> Chat
+            </a>
         </nav>
     </div>
 </div>
