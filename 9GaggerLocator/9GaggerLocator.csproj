@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,6 +67,8 @@
     <Content Include="public\app\account\profile.html" />
     <Content Include="public\app\admin\users.html" />
     <Content Include="public\app\interaction\chat.html" />
+    <Content Include="public\app\layout\leftMenu\ldLeftMenu.js" />
+    <Content Include="public\app\layout\leftMenu\leftMenu.html" />
     <Content Include="public\app\layout\special\notAuthorized.html" />
     <Content Include="public\bower\angular-animate\.bower.json" />
     <Content Include="public\bower\angular-animate\angular-animate.min.js.map" />
@@ -247,6 +250,7 @@
     <Content Include="server\models\user.js" />
     <Content Include="server\services\geoDataService.js" />
     <Content Include="server\utilities\encryption.js" />
+    <TypeScriptCompile Include="public\app\layout\leftMenu\ldLeftMenu.ts" />
     <TypeScriptCompile Include="public\app\layout\navbar\ldNavBarDirective.ts" />
     <TypeScriptCompile Include="server\utilities\logger.ts" />
     <Content Include="server\views\index.jade" />

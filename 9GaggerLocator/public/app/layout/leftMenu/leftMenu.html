@@ -1,4 +1,4 @@
-<div class="left-menu">
+<!--<div class="left-menu">
     <ul class="nav navbar-nav ">
         <li ng-if="!vm.currentUser" ui-sref-active="active">
             <a ui-sref="login"><span class="fa fa-user-secret"></span> Log in</a>
@@ -13,4 +13,12 @@
             <a ui-sref="chat"><span class="fa fa-smile-o"></span> Chat</a>
         </li>
     </ul>
+</div>-->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" ui-sref="login">Log in</a>
+            <a class="mdl-navigation__link" ui-sref="login">Register</a>
+        </nav>
+    </div>
 </div>

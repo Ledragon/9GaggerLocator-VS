@@ -70,7 +70,7 @@ var app;
             };
             geoService.serviceId = 'geoService';
             return geoService;
-        }());
+        })();
         var app = angular.module('app');
         app.factory(geoService.serviceId, [
             '$http', '$q',

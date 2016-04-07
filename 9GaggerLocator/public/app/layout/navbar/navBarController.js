@@ -36,7 +36,7 @@ var app;
             };
             navBarController.controllerId = 'navBarController';
             return navBarController;
-        }());
+        })();
         var app = angular.module('app');
         app.controller(navBarController.controllerId, [
             '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',

@@ -13,7 +13,7 @@ var app;
             };
             identityService.serviceId = 'identityService';
             return identityService;
-        }());
+        })();
         var app = angular.module('app');
         app.factory(identityService.serviceId, [function () { return new identityService(); }]);
     })(Services = app_1.Services || (app_1.Services = {}));

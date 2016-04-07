@@ -25,7 +25,7 @@ var app;
                 });
             };
             return LoginController;
-        }());
+        })();
         var app = angular.module('app');
         app.controller('LoginController', [
             '$state', 'authenticationService', 'notifierService',

@@ -19,7 +19,7 @@ var app;
             };
             chatController.controllerId = 'chatController';
             return chatController;
-        }());
+        })();
         var app = angular.module('app');
         app.controller(chatController.controllerId, ['$scope', 'realTimeService', function ($scope, realTimeService) { return new chatController($scope, realTimeService); }]);
     })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
