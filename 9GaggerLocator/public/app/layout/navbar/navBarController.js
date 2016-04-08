@@ -1,7 +1,7 @@
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../../typings/angular-ui-router/angular-ui-router.d.ts" />
 var app;
-(function (app_1) {
+(function (app) {
     var Controllers;
     (function (Controllers) {
         var navBarController = (function () {
@@ -10,7 +10,6 @@ var app;
                 this.authenticationService = authenticationService;
                 this.notifierService = notifierService;
                 this.realTimeService = realTimeService;
-                $scope.vm = this;
                 var self = this;
                 this.unread = 0;
                 $scope.$watch(function () { return identityService.currentUser; }, function () {
@@ -35,14 +34,10 @@ var app;
                 });
             };
             navBarController.controllerId = 'navBarController';
+            navBarController.$inject = ['$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService'];
             return navBarController;
         })();
-        var app = angular.module('app');
-        app.controller(navBarController.controllerId, [
-            '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',
-            function ($scope, $state, identityService, authenticationService, notifierService, realTimeService) {
-                return new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService);
-            }
-        ]);
-    })(Controllers = app_1.Controllers || (app_1.Controllers = {}));
+        angular.module('app')
+            .controller(navBarController.controllerId, navBarController);
+    })(Controllers = app.Controllers || (app.Controllers = {}));
 })(app || (app = {}));

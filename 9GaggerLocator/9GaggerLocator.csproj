@@ -231,6 +231,8 @@
     <Content Include="public\bower\jquery\src\sizzle\dist\sizzle.min.map" />
     <Content Include="public\bower\lodash\.bower.json" />
     <Content Include="public\bower\lodash\bower.json" />
+    <Content Include="public\bower\material-design-lite\material.min.css" />
+    <Content Include="public\bower\material-design-lite\material.min.js" />
     <Content Include="public\content\app.css.map">
       <DependentUpon>app.css</DependentUpon>
     </Content>

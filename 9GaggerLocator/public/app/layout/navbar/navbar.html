@@ -1,36 +1,20 @@
-<nav class="navbar navbar-inverse" ng-controller="navBarController as vm">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="home" ui-sref-active="active">
-                <span class="fa fa-map-marker"></span> 9
-            </a>
-        </div>
-
-        <ul class="nav navbar-nav navbar-right" ng-show="vm.currentUser">
-            <li>
-                <a ui-sref-active ui-sref="inbox">
-                    <i class="fa fa-envelope fa-adjust"></i>
-                    <span class="badge">{{vm.unread}}</span>
-                </a>
-            </li>
-            <li class="dropdown">
-                <a href="" data-toggle="dropdown">
-                    {{vm.currentUser.username}}
-                    <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li ng-if="vm.currentUser.isAdmin()">
-                        <a ui-sref="users">Users admin</a>
-                    </li>
-                    <li>
-                        <a ui-sref="profile">Profile</a>
-                    </li>
-                    <li>
-                        <a href="" ng-click="vm.signout()">Sign out</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
+<header class="mdl-layout__header">
+    <div class="mdl-layout__drawer-button" role="button">
+        <i class="fa fa-ellipsis-v"></i>
     </div>
-</nav>
+    <div class="mdl-layout__header-row">
+        <a class="mdl-layout-title" ui-sref="home" ui-sref-active="active">
+            <span class="fa fa-map-marker"></span> 9
+        </a>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation" ng-show="vm.currentUser">
+            <a ui-sref="inbox" class="mdl-navigation__link">
+                <i class="fa fa-envelope fa-adjust"></i>
+                <span class="badge">{{vm.unread}}</span>
+            </a>
+            <a ui-sref="users" class="mdl-navigation__link" ng-if="vm.currentUser.isAdmin()">Users admin</a>
+            <a ui-sref="profile" class="mdl-navigation__link">Profile</a>
+            <a ng-click="vm.signout()" class="mdl-navigation__link">Sign out</a>
+        </nav>
+    </div>
+</header>

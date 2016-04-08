@@ -8,6 +8,7 @@ var app;
                 this.templateUrl = 'app/layout/navbar/navbar.html';
                 this.controller = 'navBarController';
                 this.controllerAs = 'vm';
+                this.replace = true;
             }
             ldNavBarDirective.directiveId = 'ldNavBarDirective';
             return ldNavBarDirective;

@@ -16,15 +16,15 @@
 </head>
 
 <body ng-app="app">
-<div class="mdl-layout__container">
-    <ld-nav-bar-directive></ld-nav-bar-directive>
-    <!--<div class="container-fluid">-->
-    <ld-left-menu></ld-left-menu>
-    <div class="main-content ui-view-container">
-        <div ui-view></div>
-
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer 
+             mdl-layout--fixed-header has-drawer">
+        <ld-nav-bar-directive></ld-nav-bar-directive>
+        <ld-left-menu></ld-left-menu>
+        <!--<div class="container-fluid">-->
+        <div class="mdl-layout__content">
+            <ui-view></ui-view>
+        </div>
     </div>
-</div>
 
 <!-- bower:js -->
 <script src="bower/jquery/dist/jquery.js"></script>

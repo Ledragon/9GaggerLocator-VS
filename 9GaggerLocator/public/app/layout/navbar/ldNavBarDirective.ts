@@ -6,6 +6,7 @@
         templateUrl = 'app/layout/navbar/navbar.html';
         controller = 'navBarController';
         controllerAs = 'vm';
+        replace=true;
 
     }
 

@@ -16,13 +16,13 @@ module app.Controllers {
         private currentState: string;
         public unread: number;
 
+        static $inject = ['$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService'];
         constructor($scope: InavBarScope,
             private $state: angular.ui.IStateService,
             identityService: Services.IidentityService,
             private authenticationService: Services.IauthenticationService,
             private notifierService: Services.InotificationService,
             private realTimeService: Services.IrealTimeService) {
-            $scope.vm = this;
             var self = this;
             this.unread = 0;
             $scope.$watch(() => identityService.currentUser, () => {
@@ -50,11 +50,6 @@ module app.Controllers {
         }
     }
 
-    var app = angular.module('app');
-    app.controller(navBarController.controllerId,
-    [
-        '$scope', '$state', 'identityService', 'authenticationService', 'notifierService', 'realTimeService',
-        ($scope, $state, identityService, authenticationService, notifierService, realTimeService) =>
-        new navBarController($scope, $state, identityService, authenticationService, notifierService, realTimeService)
-    ]);
+    angular.module('app')
+        .controller(navBarController.controllerId, navBarController);
 }
